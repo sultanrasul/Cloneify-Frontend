@@ -18,8 +18,13 @@ body{
 
 .padding{
 	transform: translateY(1200%);
-	position: relative;
+	position: absolute;
+	top: 98%;
+	transform: translate(0, -98%);
+	padding: 10px;
+	width: 100%;
 }
+
 
 .navigation{
     width: 50%;

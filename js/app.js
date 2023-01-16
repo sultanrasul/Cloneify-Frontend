@@ -118,7 +118,7 @@ function activelink() {
     this.classList.add('active');
     activeTab = this.textContent;
     console.log(activeTab);
-    localStorage.setItem('current_tab', activeTab);
+    sessionStorage.setItem('current_tab', activeTab);
 
 }
 list.forEach((item) =>
