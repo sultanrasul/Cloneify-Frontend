@@ -117,7 +117,7 @@ function activelink() {
         item.classList.remove('active'));
     this.classList.add('active');
     activeTab = this.textContent;
-    console.log(activeTab);
+    // console.log(activeTab);
     sessionStorage.setItem('current_tab', activeTab);
 
 }

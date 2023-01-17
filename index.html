@@ -2,12 +2,15 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css\pages.css">
     <script src="js\app.js" defer></script>
+    <script src="js/pages.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <title>Spotify Login</title>
   </head>
   <body>
+
     <div class="padding">
       <div class="navigation">
         <ul>
@@ -47,6 +50,36 @@
           
           <div class="indicator"></div>
         </ul>
+      </div>
+    </div>
+
+    <div class="home">
+      <div class="pages">
+        <div class="page one">
+          <h1>PAGE 1</h1>
+      <div>
+        <button onClick="slide('next')">Next</button>
+      </div>
+    </div>
+    <div class="page two">
+      <h1>PAGE 2</h1>
+      <div>
+        <button onClick="slide('prev')">Previous</button>
+        <button onClick="slide('next')">Next</button>
+      </div>
+    </div>
+    <div class="page three">
+      <h1>PAGE 3</h1>
+      <div>
+        <button onClick="slide('prev')">Previous</button>
+        <button onClick="slide('next')">Next</button>
+      </div>
+    </div>
+    <div class="page four">
+      <h1>PAGE 4</h1>
+      <div>
+        <button onClick="slide('prev')">Previous</button>
+      </div>
       </div>
     </div>
   </body>
