@@ -17,7 +17,12 @@ button{
     width: 100%;
 	overflow: hidden;
 }
-  
+
+h1{
+    color: black;
+}
+
+
 .pages {
     display: flex;
     width: 600%;
@@ -32,7 +37,7 @@ button{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 100px;
+    gap: 10px;
     transition: all 0.7s;
     color: white;    
     
@@ -40,17 +45,21 @@ button{
   
   .one{
     background: rgb(255, 68, 0);
+    background: linear-gradient(135deg, white, rgb(156, 156, 156));
 
   }
   
   .two{
     background-color: dodgerblue;
+    background: linear-gradient(135deg, white, rgb(156, 156, 156));
   }
   
   .three{
     background-color: indigo;
+    background: linear-gradient(135deg, white, rgb(156, 156, 156));
   }
   
   .four{
     background-color: limegreen;
+    background: linear-gradient(135deg, white, rgb(156, 156, 156));
   }
