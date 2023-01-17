@@ -15,7 +15,7 @@ function checkAndRefreshToken() {
         .then(response => {
             if (response.status === 401) {
                 // Access token is expired, send refresh token to backend
-                fetch(`https://cloneify-backend.onrender.com//refresh_token?refresh_token=${refresh_token}`)
+                fetch(`https://cloneify-backend.onrender.com/refresh_token?refresh_token=${refresh_token}`)
                     .then(response => response.json())
                     .then(data => {
                         access_token = data.access_token;
@@ -46,7 +46,6 @@ if (authCode) {
             refresh_token = data.refresh_token;
             localStorage.setItem('access_token', access_token);
             localStorage.setItem('refresh_token', refresh_token);
-
             window.history.replaceState({}, document.title, "/"); //removes code from url w/o refreshing
             location.reload(); //refreshs the page
 
@@ -108,18 +107,3 @@ if (localStorage.getItem('access_token')) {
         }, 550);
     });
 }
-
-
-const list = document.querySelectorAll('.list');
-let activeTab;
-function activelink() {
-    list.forEach((item) =>
-        item.classList.remove('active'));
-    this.classList.add('active');
-    activeTab = this.textContent;
-    // console.log(activeTab);
-    sessionStorage.setItem('current_tab', activeTab);
-
-}
-list.forEach((item) =>
-    item.addEventListener('click', activelink));

@@ -7,38 +7,38 @@
     <script src="js/pages.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <title>Spotify Login</title>
+    <title>Cloneify</title>
   </head>
   <body>
 
     <div class="padding">
       <div class="navigation">
         <ul>
-          <li class="list active">
+          <li class="list active" data-page="0">
             <a href="#">
               <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
               <span class="text ">Home</span>
             </a>
           </li>
-          <li class="list">
+          <li class="list" data-page="1">
             <a href="#">
               <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
               <span class="text">Profile</span>
             </a>
           </li>
-          <li class="list">
+          <li class="list" data-page="2">
             <a href="#">
               <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
               <span class="text">Messages</span>
             </a>
           </li>
-          <li class="list">
+          <li class="list" data-page="3">
             <a href="#">
               <span class="icon"><ion-icon name="image-outline"></ion-icon></span>
               <span class="text">Photos</span>
             </a>
           </li>
-          <li class="list" id="signin">
+          <li class="list" id="signin" data-page="4">
             <a href="#">
               <span class="icon" id="signin_img">
                 <ion-icon name="log-in-outline"></ion-icon>
@@ -58,35 +58,23 @@
         <div class="page one">
           <h1>PAGE 1</h1>
       <div>
-        <button onClick="slide('next')">Next</button>
       </div>
     </div>
     <div class="page two">
       <h1>PAGE 2</h1>
       <div>
-        <button onClick="slide('prev')">Previous</button>
-        <button onClick="slide('next')">Next</button>
       </div>
     </div>
     <div class="page three">
       <h1>PAGE 3</h1>
       <div>
-        <button onClick="slide('prev')">Previous</button>
-        <button onClick="slide('next')">Next</button>
       </div>
     </div>
     <div class="page four">
       <h1>PAGE 4</h1>
       <div>
-        <button onClick="slide('prev')">Previous</button>
       </div>
       </div>
     </div>
   </body>
 </html>
-
-<!-- 
-  alfie info:
-  backend: localhost:8888
-  frontend: localhost:5500
- -->
