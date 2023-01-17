@@ -1,5 +1,5 @@
 const pages = document.querySelectorAll(".page");
-const translateAmount = 158;
+const translateAmount = 166.8;
 let translate = 0;
 
 slide = (direction) => {

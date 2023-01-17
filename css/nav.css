@@ -31,7 +31,6 @@ body{
 	/* background: linear-gradient(135deg, white, rgb(156, 156, 156)); */
     background: transparent;
 	display: flex;
-    justify-content: center;
     align-items: center;
     border-radius: 10px;
 	margin: auto;
