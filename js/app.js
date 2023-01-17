@@ -15,7 +15,7 @@ function checkAndRefreshToken() {
         .then(response => {
             if (response.status === 401) {
                 // Access token is expired, send refresh token to backend
-                fetch(`https://cloneify-backend.onrender.com//refresh_token?refresh_token=${refresh_token}`)
+                fetch(`https://cloneify-backend.onrender.com/refresh_token?refresh_token=${refresh_token}`)
                     .then(response => response.json())
                     .then(data => {
                         access_token = data.access_token;
