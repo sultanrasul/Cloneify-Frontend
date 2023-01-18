@@ -14,7 +14,7 @@ list.forEach((item) =>
 
 
 const pages = document.querySelectorAll(".page");
-const translateAmount = 166.8;
+const translateAmount = 130;
 let currentPage = 0;
 
 list.forEach((item) => {
@@ -35,3 +35,4 @@ function slide(targetPage) {
         console.log(`Translate after: ${translate}`);
     }
 };
+slide(1);

@@ -11,34 +11,22 @@
   </head>
   <body>
 
-    <div class="padding">
+    <div class="padding" onload="slide(1)">
       <div class="navigation">
         <ul>
-          <li class="list active" data-page="0">
+          <li class="list" data-page="0">
+            <a href="#">
+              <span class="icon"><ion-icon name="swap-horizontal-outline"></ion-icon></span>
+              <span class="text ">Clone</span>
+            </a>
+          </li>
+          <li class="list active" data-page="1">
             <a href="#">
               <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-              <span class="text ">Home</span>
+              <span class="text">Home</span>
             </a>
           </li>
-          <li class="list" data-page="1">
-            <a href="#">
-              <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-              <span class="text">Profile</span>
-            </a>
-          </li>
-          <li class="list" data-page="2">
-            <a href="#">
-              <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-              <span class="text">Messages</span>
-            </a>
-          </li>
-          <li class="list" data-page="3">
-            <a href="#">
-              <span class="icon"><ion-icon name="image-outline"></ion-icon></span>
-              <span class="text">Photos</span>
-            </a>
-          </li>
-          <li class="list" id="signin" data-page="4">
+          <li class="list" id="signin" data-page="2">
             <a href="#">
               <span class="icon" id="signin_img">
                 <ion-icon name="log-in-outline"></ion-icon>
@@ -61,7 +49,9 @@
       </div>
     </div>
     <div class="page two">
-      <h1>PAGE 2</h1>
+      <h1> Cloneify</h1>
+      <h2>Welcome.</h2>
+      <h3 id="displayname"></h2>
       <div>
       </div>
     </div>
@@ -70,11 +60,6 @@
       <div>
       </div>
     </div>
-    <div class="page four">
-      <h1>PAGE 4</h1>
-      <div>
-      </div>
-      </div>
     </div>
   </body>
 </html>
