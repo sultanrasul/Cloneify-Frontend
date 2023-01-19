@@ -1,0 +1,82 @@
+ul#topTracksList {
+    flex-direction: column; /* change the direction of the list items to be vertical */
+    list-style-type: none; /* remove the bullet points */
+    display: flex; /* display the list items in a row */
+    margin: 0; /* remove the default margin */
+    padding: 0; /* remove the default padding */
+    width: 100%;
+}
+
+/* styles for the list items */
+ul#topTracksList li {
+    width: 350px; /* set the width of the list item */
+    display:block;
+    padding: 10px; /* add some padding around the content */
+    margin-bottom: 10px; /* add some margin to the bottom of the list item */
+    box-sizing: border-box; /* include the padding and border in the total width */
+    background: linear-gradient(135deg, rgb(83, 123, 119), rgb(156, 156, 156));
+    border-radius: 5px;
+}
+
+/* styles for the song name */
+ul#topTracksList li h1 {
+    font-size: 18px; /* set the font size for the song name */
+    margin: 0 0 5px 0; /* remove the default margin */
+    color: black;
+    background-color: white;
+}
+
+/* styles for the artist name */
+ul#topTracksList li h2 {
+    font-size: 14px; /* set the font size for the artist name */
+    margin: 0; /* remove the default margin */
+    color: rgb(120, 52, 52); /* set the color for the artist name */
+}
+
+/* styles for the list container */
+.topTracksList {
+    width: 30%; /* set the width of the list item */
+    padding: 10px; /* add some padding around the content */
+    margin-bottom: 10px; /* add some margin to the bottom of the list item */
+    box-sizing: border-box; /* include the padding and border in the total width */
+}
+
+.list-container {
+    text-align: center;
+    height: 500px; /* set a fixed height for the container */
+    overflow-y: scroll; /* enable scrolling on the y-axis */
+    padding: 2.5% 0% 0% 4% ;
+    overflow-x: hidden;
+    height: 60vh;
+    width: 425px;
+}
+
+#topTracksList img {
+    width: 69px; /* set the width of the image */
+    height:69px; /* set the height of the image */
+    float: left; /* align the image to the left */
+    margin-right: 10px; /* add some margin to the right of the image */
+    display: inline-block; /* make the image an inline-block element */
+    margin-right: 10px; /* add some margin to the right of the image */
+    border-radius: 5px; /* set the border-radius to a fixed pixel value */
+}
+li {
+    text-align:left;
+}
+
+h3 {
+    font-size: 18px; /* set the font size for the song title */
+    color: black; /* set the color for the song title */
+    margin: 0 0 5px 0; /* add some margin to the bottom of the song title */
+}
+
+::-webkit-scrollbar {
+    width: 12px; /* set the width of the scrollbar */
+    background-color: black; /* set the background color of the scrollbar */
+}
+
+/* change the color of the thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #1DB954; /* set the color of the thumb */
+    border-radius: 10px; /* set the border radius of the thumb */
+}

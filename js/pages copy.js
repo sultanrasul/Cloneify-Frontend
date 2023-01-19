@@ -20,8 +20,8 @@ let currentPage = 0;
 list.forEach((item) => {
     item.addEventListener('click', () => {
         let targetPage = item.getAttribute('data-page');
-        console.log(`Current Page: ${currentPage}`);
-        console.log(`Target Page: ${targetPage}`);
+        // console.log(`Current Page: ${currentPage}`);
+        // console.log(`Target Page: ${targetPage}`);
         slide(targetPage);
 
     });
@@ -33,7 +33,7 @@ function slide(targetPage) {
     } else {
         distance = targetPage - currentPage;
         translate = -(distance) * translateAmount;
-        console.log(translate)
+        // console.log(translate)
         pages.forEach(pages => (pages.style.transform = `translateX(${translate}%)`));
         currentPage = targetPage;
     }

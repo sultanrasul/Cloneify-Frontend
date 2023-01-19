@@ -20,6 +20,7 @@ function checkAndRefreshToken() {
                     .then(data => {
                         access_token = data.access_token;
                         refresh_token = data.refresh_token;
+                        console.log(refresh_token);
                         localStorage.setItem('access_token', access_token);
                         localStorage.setItem('refresh_token', refresh_token)
                         location.reload();
@@ -34,6 +35,47 @@ function checkAndRefreshToken() {
         });
 }
 
+function getTopTracks() {
+    access_token = localStorage.getItem('access_token');
+    fetch('https://api.spotify.com/v1/me/top/tracks', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token}` } })
+        .then(response => response.json())
+        .then(data => {
+            // Create an empty array to store the list items
+            var listItems = [];
+
+            // Iterate through the data and create a list item for each track
+            data.items.forEach(function (track, index) {
+                var listItem = document.createElement("li");
+                var indexEl = document.createElement("div");
+                var indexTxt = document.createTextNode(index + 1);
+                var song = document.createTextNode(track.name);
+                var artist = document.createTextNode(track.artists[0].name);
+                var img = document.createElement('img');
+                img.src = track.album.images[0].url;
+                var songTitle = document.createElement("h3");
+                var artistName = document.createElement("h4");
+                songTitle.appendChild(song);
+                artistName.appendChild(artist);
+                indexEl.appendChild(indexTxt);
+                listItem.appendChild(img);
+                listItem.appendChild(indexEl);
+                listItem.appendChild(songTitle);
+                listItem.appendChild(artistName);
+                listItems.push(listItem);
+            });
+
+            // Get the list element from the HTML
+            var list = document.getElementById("topTracksList");
+
+            // Append the list items to the list element
+            listItems.forEach(function (item) {
+                list.appendChild(item);
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
 
 const queryString = window.location.search; // gets url
 const urlParams = new URLSearchParams(queryString); // gets params from url
@@ -68,10 +110,14 @@ if (authCode) {
 }
 
 
+
+
+
 // Check if access token is stored in session storage
 if (localStorage.getItem('access_token')) {
     console.log("Signed In!")
     checkAndRefreshToken();
+    getTopTracks();
 
     access_token = localStorage.getItem('access_token');
     // Use access token to authenticate requests to protected resources
@@ -84,10 +130,6 @@ if (localStorage.getItem('access_token')) {
             document.getElementById('signin_img').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
             document.getElementById("signin_text").textContent = display_name;
             document.getElementById("displayname").textContent = display_name;
-
-
-
-
         })
         .catch(error => {
             console.log(error)
