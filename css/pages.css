@@ -31,12 +31,20 @@ button{
         -webkit-background-clip: text;
 }
 
-h2{
+#top_tracks {
   font-size: 30px;
   color: black;
   padding: 1% 0% 0% 7%;
   font-weight: bold;
 }
+#top_artists {
+  font-size: 30px;
+  color: black;
+  padding: 1% 0% 0% 42%;
+  font-weight: bold;
+}
+
+
 
 h3 {
     font-size: 24px;
@@ -76,8 +84,27 @@ scale: 1.73;
     transition: all 0.7s;
     color: white;   
     border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-left: auto;
+    margin-right: 0;
  
   }
+
+.page::-webkit-scrollbar {
+  width: 12px;
+  height: 10px; /* set the width of the scrollbar */
+  background-color: rgba(0, 0, 0, 0); /* set the background color of the scrollbar */
+  /* Add the following to position the scrollbar on the right side of the page */
+  position: fixed; /* position the scrollbar as fixed */
+  right: 0; /* set the right side of the scrollbar to the right edge of the page */
+}
+
+/* change the color of the thumb */
+.page::-webkit-scrollbar-thumb {
+  background-color: #1DB954; /* set the color of the thumb */
+  border-radius: 10px; /* set the border radius of the thumb */
+}
   
   .one{
     background: rgb(255, 68, 0);

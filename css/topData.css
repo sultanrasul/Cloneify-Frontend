@@ -44,9 +44,7 @@ ul#topTracksList li h2 {
 .list-container {
     text-align: center;
     height: 500px; /* set a fixed height for the container */
-    overflow-y: scroll; /* enable scrolling on the y-axis */
     padding: 1.5% 0% 0% 4% ;
-    overflow-x: hidden;
     height: 60vh;
     width: 100%;
     display: flex; /* display the lists in a row */
@@ -83,7 +81,7 @@ ul#topArtistsList li {
     border-radius: 5px; /* set the border-radius to a fixed pixel value */
     
 
-    border-radius: 50%;
+    border-radius: 100%;
     -webkit-box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
     box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
     object-fit: cover;
@@ -170,6 +168,10 @@ ul#topTracksList li div {
 ::-webkit-scrollbar {
     width: 12px; /* set the width of the scrollbar */
     background-color: rgba(0, 0, 0, 0); /* set the background color of the scrollbar */
+    /* Add the following to position the scrollbar on the right side of the page */
+    position: fixed; /* position the scrollbar as fixed */
+    right: 0;
+    justify-content: center; /* set the right side of the scrollbar to the right edge of the page */
 }
 
 /* change the color of the thumb */
@@ -190,3 +192,6 @@ ul#topArtistsList li {
 .list-container {
     width: 70%;
 }
+
+
+

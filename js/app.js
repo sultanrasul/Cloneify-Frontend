@@ -15,7 +15,7 @@ function checkAndRefreshToken() {
         .then(response => {
             if (response.status === 401) {
                 // Access token is expired, zsend refresh token to backend
-                fetch(`http://localhost:8888/refresh_token?refresh_token=${refresh_token}`)
+                fetch(`https://cloneify-backend.onrender.com/refresh_token?refresh_token=${refresh_token}`)
                     .then(response => response.json())
                     .then(data => {
                         access_token = data.access_token;
@@ -122,7 +122,7 @@ const queryString = window.location.search; // gets url
 const urlParams = new URLSearchParams(queryString); // gets params from url
 const authCode = urlParams.get("code") || null;
 if (authCode) {
-    fetch(`http://localhost:8888/callback?code=${authCode}`) //sends req to spotify through backend 
+    fetch(`https://cloneify-backend.onrender.com/callback?code=${authCode}`) //sends req to spotify through backend 
         .then(response => response.json())
         .then(data => {
             access_token = data.access_token;
@@ -189,7 +189,7 @@ if (localStorage.getItem('access_token')) {
     const signin = document.getElementById("signin");
     signin.addEventListener("click", function () {
         setTimeout(() => {
-            window.location.href = "http://localhost:8888/login1";
+            window.location.href = "https://cloneify-backend.onrender.com/login1";
         }, 550);
     });
 }
