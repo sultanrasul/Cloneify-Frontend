@@ -1,4 +1,5 @@
 const list = document.querySelectorAll('.list');
+
 let activeTab;
 function activelink() {
     list.forEach((item) =>
@@ -14,7 +15,7 @@ list.forEach((item) =>
 
 
 const pages = document.querySelectorAll(".page");
-const translateAmount = 130;
+const translateAmount = 133.3;
 let currentPage = 0;
 
 list.forEach((item) => {

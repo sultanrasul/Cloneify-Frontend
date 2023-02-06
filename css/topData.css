@@ -9,14 +9,17 @@ ul#topTracksList {
 
 /* styles for the list items */
 ul#topTracksList li {
-    width: 350px; /* set the width of the list item */
+    width: 300px; /* set the width of the list item */
     display:block;
     padding: 10px; /* add some padding around the content */
     margin-bottom: 10px; /* add some margin to the bottom of the list item */
     box-sizing:content-box; /* include the padding and border in the total width */
     background: linear-gradient(135deg, rgb(83, 123, 119), rgb(156, 156, 156));
     border-radius: 5px;
+    text-align:center; /*center the text inside the li element*/
+
 }
+
 
 /* styles for the song name */
 ul#topTracksList li h1 {
@@ -48,12 +51,27 @@ ul#topTracksList li h2 {
     height: 60vh;
     width: 100%;
     display: flex; /* display the lists in a row */
+    justify-content: space-between; /* distribute the space between the two tags */
+        
 }
+
 
 .list-container1 {
     float: right;
 }
 
+#topArtistsList {
+    position: relative; /* sets the position of the #topArtistsList container as relative */
+    display: flex;
+}
+
+h2.title#top_artists {
+    position: absolute; /* sets the position of the <h2> element as absolute */
+    top: 0; /* positions the <h2> element at the top of the #topArtistsList container */
+    left: 0; /* positions the <h2> element at the left of the #topArtistsList container */
+    right:0; /* positions the <h2> element at the right of the #topArtistsList container */
+    z-index: 1; /* sets the z-index of the <h2> element to 1, so it will be displayed above the #topArtistsList container */
+}
 ul#topArtistsList {
     flex-direction: column;
     list-style-type: none;
@@ -91,13 +109,25 @@ ul#topArtistsList li {
     width: 71px;
     height: 71px;
     display: inline-block;
-    scale: 1.73;
+    scale: 2;
+    z-index: -1;
+        
 }
 #topArtistsList h4 {
     /* set the height of the image */
    float: right; /* align the image to the left */
    clear: both;
+   position:relative;
+   text-align: center;
+    position: relative; /* sets the position of the <h4> element as relative*/
+    z-index: 1; /* sets the z-index of the <h4> element to 1, so it will be displayed above the pseudo-element */
+    text-align: right; /* center aligns the text inside the <h4> element*/
+    width: 60%;
 }
+
+
+
+
 ul#topArtistsList li div {
     color: black;
     font-size: 18px;
@@ -195,3 +225,26 @@ ul#topArtistsList li {
 
 
 
+
+.title-container {
+    position: relative; /* sets the position of the container as relative */
+    height: 50px; /* set the same height for both tags */
+    margin-bottom: 20px; /* add some margin to the bottom of the tags */
+}
+
+.title {
+    position: absolute; /* sets the position of the titles as absolute */
+    top: 0; /* positions t  he titles at the top of the container */
+    height: 50px; /* set the same height for both tags */
+    width: 100%; /* makes the width of the title to be the same as the width of the container */
+}
+
+
+
+@media screen and (max-width: 600px) {
+    h2.title#top_artists {
+        position: relative; /* sets the position of the <h2> element as relative */
+        width:100%; /* makes the width of the title to be the same as the width of the container */
+        text-align:center; /* center align the text inside the title*/
+    }
+}

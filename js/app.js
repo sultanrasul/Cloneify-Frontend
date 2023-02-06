@@ -1,5 +1,7 @@
 let access_token;
 let refresh_token;
+const top_tracks_title = document.getElementById("top_tracks");
+const top_artists_title = document.getElementById("top_artists");
 
 function checkAndRefreshToken() {
     access_token = localStorage.getItem('access_token');
@@ -15,7 +17,7 @@ function checkAndRefreshToken() {
         .then(response => {
             if (response.status === 401) {
                 // Access token is expired, zsend refresh token to backend
-                fetch(`https://cloneify-backend.onrender.com/refresh_token?refresh_token=${refresh_token}`)
+                fetch(`http://localhost:8888/refresh_token?refresh_token=${refresh_token}`)
                     .then(response => response.json())
                     .then(data => {
                         access_token = data.access_token;
@@ -39,7 +41,9 @@ function getTopTracks() {
     access_token = localStorage.getItem('access_token');
     fetch('https://api.spotify.com/v1/me/top/tracks', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token}` } })
         .then(response => response.json())
-        .then(data => {
+        .then(data => { 
+            top_tracks_title.style = "display: block;"
+
             console.log(data);
             // Create an empty array to store the list items
             var listItems = [];
@@ -83,6 +87,7 @@ function getTopArtists() {
     fetch('https://api.spotify.com/v1/me/top/artists', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token}` } })
         .then(response => response.json())
         .then(data => {
+            top_artists_title.style = "display: block;"
             console.log(data);
             // Create an empty array to store the list items
             var listItems = [];
@@ -122,7 +127,7 @@ const queryString = window.location.search; // gets url
 const urlParams = new URLSearchParams(queryString); // gets params from url
 const authCode = urlParams.get("code") || null;
 if (authCode) {
-    fetch(`https://cloneify-backend.onrender.com/callback?code=${authCode}`) //sends req to spotify through backend 
+    fetch(`http://localhost:8888/callback?code=${authCode}`) //sends req to spotify through backend 
         .then(response => response.json())
         .then(data => {
             access_token = data.access_token;
@@ -189,7 +194,7 @@ if (localStorage.getItem('access_token')) {
     const signin = document.getElementById("signin");
     signin.addEventListener("click", function () {
         setTimeout(() => {
-            window.location.href = "https://cloneify-backend.onrender.com/login1";
+            window.location.href = "http://localhost:8888/login1";
         }, 550);
     });
 }
