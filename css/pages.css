@@ -55,11 +55,6 @@ h3 {
     color: black;
     padding: 0.8% 0% 0% 7%;
 }
-p {
-  color: black;
-  padding: 1% 0% 0% 7%;
-}
-
 
 .pages {
     display: flex;
@@ -72,14 +67,14 @@ p {
   border-radius: 50%;
   -webkit-box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
   box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
-object-fit: cover;
-display: block;
+  object-fit: cover;
+  display: block;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 34px;
   height: 34px;
   display: inline-block;
-scale: 1.73;
+  scale: 1.73;
 }
 
 .page {
@@ -110,49 +105,130 @@ scale: 1.73;
   border-radius: 10px; /* set the border radius of the thumb */
 }
   
-  .one{
-    background: rgb(255, 68, 0);
-    background: linear-gradient(135deg, white, rgb(156, 156, 156));
-  }
-  
-  .two{
-    background-color: dodgerblue;
-    background: linear-gradient(135deg, white, rgb(156, 156, 156));
-  }
-  
-  .three{
-    background-color: indigo;
-    background: linear-gradient(135deg, white, rgb(156, 156, 156));
-  }
-  
-  .four{
-    background-color: limegreen;
-    background: linear-gradient(135deg, white, rgb(156, 156, 156));
-  }
+.one{
+  background: rgb(255, 68, 0);
+  background: linear-gradient(135deg, white, rgb(156, 156, 156));
+}
 
-  /* display: flex;
+.two{
+  background-color: dodgerblue;
+  background: linear-gradient(135deg, white, rgb(156, 156, 156));
+}
+
+.three{
+  background-color: indigo;
+  background: linear-gradient(135deg, white, rgb(156, 156, 156));
+}
+
+.four{
+  background-color: limegreen;
+  background: linear-gradient(135deg, white, rgb(156, 156, 156));
+}
+/* 
+display: flex;
+width: 100%;
+height: 77vh;
+background: transparent;
+display: flex;
+align-items: center;
+border-radius: 10px;
+margin: auto; */
+.flex-container {
+  grid-gap: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  overflow: hidden;
+  padding: 0 10%;
+  margin: 0;
+  list-style-type: none;
+  background-color: rgba(250, 11, 11, 0);
+  margin: auto;
+}
+
+.flex-child {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  width: 30%;
+  height: 10vh;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(76, 109, 106, 0), rgb(63, 62, 62));
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magenta img {
+  width: 71px;
+  height: 71px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
+}
+
+
+#profile_pic_clone_page{
+  padding-right: 10%;
+}
+
+#user_email{
+  color: white;
+  font-weight:400;
+
+}
+.main__button {
+    width:145px;
+    font-size: 1rem;
+    background-image: #141414;;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.35s;
+    outline: none;
+    background: #4198a3b2;
+    margin: auto;
+}
+
+.main__button a {
+    position: relative;
+    z-index: 2;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: auto;
+}
+
+.main__button:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #1fa34d;
+    transition: all 0.35s;
+    border-radius: 4px;
+    
+}
+
+.main__button:hover {
+    transform: translateY(-5px);
+    transition: transform 250ms;
+}
+
+.main__button:hover:after {
     width: 100%;
-    height: 77vh;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    margin: auto; */
+}
 
-
-    .flex-container {
-      display: flex;
-      height: 12vh;
-      width: 50%;
-      text-align: center;
-      margin: auto;
-  }
-  
-  .flex-child {
-      flex: 1;
-      border: 2px solid rgb(104, 104, 67);
-  }  
-  
-  .flex-child:first-child {
-      
-  } 
+#projects_button {
+  color: white;
+  font-weight: bold;
+}
