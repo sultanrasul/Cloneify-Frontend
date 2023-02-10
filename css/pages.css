@@ -133,7 +133,7 @@ display: flex;
 align-items: center;
 border-radius: 10px;
 margin: auto; */
-.flex-container {
+.profiles {
   grid-gap: 10%;
   display: flex;
   flex-direction: row;
@@ -162,20 +162,18 @@ margin: auto; */
   justify-content: center;
 }
 
-.magenta img {
+.profiles img {
   width: 71px;
   height: 71px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
 }
-
-
-#profile_pic_clone_page{
+.profile_pic_clone_page{
   padding-right: 10%;
 }
 
-#user_email{
+.user_email{
   color: white;
   font-weight:400;
 
@@ -231,4 +229,71 @@ margin: auto; */
 #projects_button {
   color: white;
   font-weight: bold;
+}
+
+
+#cloneAccount{
+  scale: 4;
+  color: #2b8a4c;
+  background-color: #57565667;  
+  border-radius: 20%;
+}
+
+.clone {
+  background-color: lightblue;
+  text-align: center;
+  margin: 2%;
+  height: 50vh;
+  border-radius: 10px;
+}
+
+.selection{
+  padding-top: 5px;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+}
+
+.selection .group {
+  padding: 0px 24px;
+  margin: 8px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  position: relative;
+}
+
+label::before {
+  content: "";
+  background: url("/assests/check-circle.svg");
+  background-position: center;
+  background-size: contain;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: -44px;
+  top: -8px;
+
+  transform: scale(0) rotateZ(180deg);
+  transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+}
+
+input[type="checkbox"]:checked + label::before {
+  transform: scale(1) rotateZ(0deg);
+}
+
+label::after {
+  content: "";
+  border: 2px solid #27ae60;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: -42px;
+  top: -6px;
+  border-radius: 50%;
 }

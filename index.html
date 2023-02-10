@@ -46,20 +46,56 @@
       <div class="pages">
         <div class="page one">
           <h1>Clone Your Spotify Account</h1>
-          <div class="flex-container">
-
+          <div class="profiles">
             <div class="flex-child magenta">
-              <div id="profile_pic_clone_page"></div>
-              <div id="user1Details">
-                <h2 id="profile_name"></h1>
-                  <p id="user_email"></p>
+              <div id="profile_pic_clone_page1" class="profile_pic_clone_page"></div>
+              <div id="user1Details" class="user1Details">
+                <h2 id="profile_name1" class="profile_name"></h1>
+                  <p id="user_email1" class="user_email"></p>
               </div>
             </div>
-            
+            <ion-icon id="cloneAccount" name="swap-horizontal-outline"></ion-icon>
             <div class="flex-child green">
-              <button id="login2Button" class="main__button"><a id="projects_button" href="http://localhost:8888/login2">Login</a></button>
+              <button id="login2Button" class="main__button"><a id="projects_button">Login</a></button>
+              <div id="profile_pic_clone_page2" class="profile_pic_clone_page"></div>
+              <div id="user2Details" class="user1Details">
+                <h2 id="profile_name2" class="profile_name"></h1>
+                  <p id="user_email2" class="user_email"></p>
+              </div>
             </div>
-            
+          </div>
+          <div class="clone">
+            <div class="selection">
+        
+              <div class="group">
+                <input type="checkbox" id="all" />
+                <label for="all">All</label>
+              </div>
+              <div class="group">
+                <input type="checkbox" id="songs" />
+                <label for="songs">Liked Songs</label>
+              </div>
+              <div class="group">
+                <input type="checkbox" id="playlist" />
+                <label for="playlist">Playlists</label>
+              </div>
+              <div class="group">
+                <input type="checkbox" id="albums" />
+                <label for="albums">Albums</label>
+              </div>
+              <div class="group">
+                <input type="checkbox" id="books" />
+                <label for="books">Audio Books</label>
+              </div>
+              <div class="group">
+                <input type="checkbox" id="episodes" />
+                <label for="episodes">Episodes</label>
+              </div>
+              <div class="group">
+                <input type="checkbox" id="shows" />
+                <label for="shows">Shows</label>
+              </div>
+            </div>
           </div>
       <div>
       </div>

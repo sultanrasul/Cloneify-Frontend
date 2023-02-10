@@ -31,9 +31,7 @@ function slide(targetPage) {
     } else {
         distance = targetPage - currentPage;
         translate = -(distance) * translateAmount;
-        console.log(`Translate before: ${translate}`);
         pages.forEach(pages => (pages.style.transform = `translateX(${translate}%)`));
-        console.log(`Translate after: ${translate}`);
     }
 };
 slide(1);
