@@ -5,7 +5,7 @@
 }
 
 
-button{
+/* button{
     padding: 8px;
     width: 100px;
     border: 2px solid white;
@@ -18,7 +18,7 @@ button{
   
   button:hover{
     transform: scale(1.05);
-}
+} */
   
 .home{
     width: 100%;
@@ -231,6 +231,36 @@ margin: auto; */
   font-weight: bold;
 }
 
+.clone__button {
+  width:145px;
+  font-size: 1rem;
+  background-image: #141414;;
+  padding: 14px ;
+  border: none;
+  border-radius: 4px;
+  margin-top: 2rem;
+  cursor: pointer;
+  transition: all 0.35s;
+  outline: none;
+  background: #4198a3b2;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(-30px) translateX(-50px);
+
+}
+
+.clone__button a {
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: auto;
+  color: white;
+}
 
 #cloneAccount{
   scale: 4;
@@ -245,10 +275,12 @@ margin: auto; */
   margin: 2%;
   height: 50vh;
   border-radius: 10px;
+  position: relative;
 }
 
 .selection{
   padding-top: 5px;
+  padding-bottom: 20px;
   display: flex;
   margin: auto;
   text-align: center;
@@ -266,6 +298,10 @@ input[type="checkbox"] {
 
 label {
   position: relative;
+}
+
+label:hover{
+  cursor: pointer;
 }
 
 label::before {
@@ -296,4 +332,17 @@ label::after {
   left: -42px;
   top: -6px;
   border-radius: 50%;
+}
+
+.details {
+  margin: auto;
+  height: 70%;
+  transition: all 0.7s;
+  background-color: rgba(0, 0, 0, 0.199);   
+  border-radius: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-left: auto;
+  margin-right: 0;
+
 }

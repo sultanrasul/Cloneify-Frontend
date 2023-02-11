@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css\pages.css">
     <link rel="stylesheet" type="text/css" href="/css/topData.css">
     <script src="js\app.js" defer></script>
+    <script src="js\clone.js" defer></script>
     <script src="js/pages.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -66,36 +67,37 @@
           </div>
           <div class="clone">
             <div class="selection">
-        
               <div class="group">
-                <input type="checkbox" id="all" />
+                <input type="checkbox" id="all" name="all" onClick="toggle(this)"/>
                 <label for="all">All</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="songs" />
+                <input type="checkbox" id="songs" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="songs">Liked Songs</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="playlist" />
+                <input type="checkbox" id="playlist" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="playlist">Playlists</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="albums" />
+                <input type="checkbox" id="albums" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="albums">Albums</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="books" />
+                <input type="checkbox" id="books" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="books">Audio Books</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="episodes" />
+                <input type="checkbox" id="episodes" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="episodes">Episodes</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="shows" />
+                <input type="checkbox" id="shows" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="shows">Shows</label>
               </div>
             </div>
+            <div class="details"></div>
+            <button id="clone" class="clone__button"><a id="clone_button">Clone</a></button>
           </div>
       <div>
       </div>

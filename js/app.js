@@ -2,6 +2,9 @@ let access_token1;
 let refresh_token1;
 let access_token2;
 let refresh_token2;
+// var url = "http://localhost:8888"
+var url = "https://cloneify-backend.onrender.com"
+
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
 
@@ -19,7 +22,7 @@ function checkAndRefreshToken1() {
         .then(response => {
             if (response.status === 401) {
                 // Access token is expired, zsend refresh token to backend
-                fetch(`http://localhost:8888/refresh_token?refresh_token=${refresh_token1}`)
+                fetch(`${url}/refresh_token?refresh_token=${refresh_token1}`)
                     .then(response => response.json())
                     .then(data => {
                         access_token1 = data.access_token;
@@ -51,7 +54,7 @@ function checkAndRefreshToken2() {
         .then(response => {
             if (response.status === 401) {
                 // Access token is expired, zsend refresh token to backend
-                fetch(`http://localhost:8888/refresh_token?refresh_token=${refresh_token2}`)
+                fetch(`${url}/refresh_token?refresh_token=${refresh_token2}`)
                     .then(response => response.json())
                     .then(data => {
                         access_token2 = data.access_token;
@@ -159,7 +162,7 @@ function login1(){
     const urlParams = new URLSearchParams(queryString); // gets params from url
     const authCode = urlParams.get("code") || null;
     if (authCode) {
-        fetch(`http://localhost:8888/callback?code=${authCode}`) //sends req to spotify through backend 
+        fetch(`${url}/callback?code=${authCode}`) //sends req to spotify through backend 
             .then(response => response.json())
             .then(data => {
                 access_token1 = data.access_token;
@@ -193,7 +196,7 @@ function login2(){
     const urlParams = new URLSearchParams(queryString); // gets params from url
     const authCode = urlParams.get("code") || null;
     if (authCode) {
-        fetch(`http://localhost:8888/callback?code=${authCode}`) //sends req to spotify through backend 
+        fetch(`${url}/callback?code=${authCode}`) //sends req to spotify through backend 
             .then(response => response.json())
             .then(data => {
                 access_token2 = data.access_token;
@@ -221,6 +224,66 @@ function login2(){
             }) //catches any errors in the request process (invalid code, etc) and logs
     }
 };
+
+function getTotalData() {
+    access_token1 = localStorage.getItem('access_token1');
+    const headers = {
+        "Authorization": `Bearer ${access_token1}`,
+        "Content-Type": "application/json"
+    };
+
+    const totalData = {};
+
+    // Get the total number of songs
+    const getSongs = async () => {
+        try {
+            const response = await fetch("https://api.spotify.com/v1/me/tracks?limit=1", {
+                headers: headers
+            });
+            const data = await response.json();
+            totalData.songs = data.total;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // Get the total number of albums
+    const getAlbums = async () => {
+        try {
+            const response = await fetch("https://api.spotify.com/v1/me/albums?limit=1", {
+                headers: headers
+            });
+            const data = await response.json();
+            totalData.albums = data.total;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // Get the total number of playlists
+    const getPlaylists = async () => {
+        try {
+            const response = await fetch("https://api.spotify.com/v1/me/playlists?limit=1", {
+                headers: headers
+            });
+            const data = await response.json();
+            totalData.playlists = data.total;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    return Promise.all([getSongs(), getAlbums(), getPlaylists()])
+        .then(() => {
+            console.log(totalData);
+            return totalData;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+ 
+
 
 
 // Check if access token is stored in session storage
@@ -260,7 +323,7 @@ if (localStorage.getItem('access_token1')) {
     const signin = document.getElementById("signin");
     signin.addEventListener("click", function () {
         setTimeout(() => {
-            window.location.href = "http://localhost:8888/login1";
+            window.location.href = `${url}/login1`;
         }, 550);
     });
     login1();
@@ -268,6 +331,7 @@ if (localStorage.getItem('access_token1')) {
 
 if (localStorage.getItem('access_token2')) {
     checkAndRefreshToken2();
+    getTotalData();
     document.getElementById("login2Button").style = "display: none;";
     access_token2 = localStorage.getItem('access_token2');
     // Use access token to authenticate requests to protected resources
@@ -295,7 +359,7 @@ if (localStorage.getItem('access_token2')) {
 } else {
     const signin1 = document.getElementById("projects_button");
     signin1.addEventListener("click", function () {
-        window.location.href = "http://localhost:8888/login2";
+        window.location.href = `${url}/login2`;
     });
     login2();
 }
