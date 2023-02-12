@@ -22,10 +22,8 @@ function toggle(source) {
 function checkLengthOfChecked(){
     const all = document.getElementById("all");  
     const length = document.querySelectorAll('input[type="checkbox"]:checked').length
-    let len;
     if (length == 6){
         all.checked = true;
-        len = 7
-    } 
+}
 }
 

@@ -47,24 +47,7 @@
       <div class="pages">
         <div class="page one">
           <h1>Clone Your Spotify Account</h1>
-          <div class="profiles">
-            <div class="flex-child magenta">
-              <div id="profile_pic_clone_page1" class="profile_pic_clone_page"></div>
-              <div id="user1Details" class="user1Details">
-                <h2 id="profile_name1" class="profile_name"></h1>
-                  <p id="user_email1" class="user_email"></p>
-              </div>
-            </div>
-            <ion-icon id="cloneAccount" name="swap-horizontal-outline"></ion-icon>
-            <div class="flex-child green">
-              <button id="login2Button" class="main__button"><a id="projects_button">Login</a></button>
-              <div id="profile_pic_clone_page2" class="profile_pic_clone_page"></div>
-              <div id="user2Details" class="user1Details">
-                <h2 id="profile_name2" class="profile_name"></h1>
-                  <p id="user_email2" class="user_email"></p>
-              </div>
-            </div>
-          </div>
+
           <div class="clone">
             <div class="selection">
               <div class="group">
@@ -83,20 +66,68 @@
                 <input type="checkbox" id="albums" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="albums">Albums</label>
               </div>
-              <div class="group">
+              <!-- <div class="group">
                 <input type="checkbox" id="books" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="books">Audio Books</label>
-              </div>
+              </div> -->
               <div class="group">
                 <input type="checkbox" id="episodes" name="all" onClick="checkLengthOfChecked()"/>
                 <label for="episodes">Episodes</label>
               </div>
               <div class="group">
-                <input type="checkbox" id="shows" name="all" onClick="checkLengthOfChecked()"/>
-                <label for="shows">Shows</label>
+                <input type="checkbox" id="podcasts" name="all" onClick="checkLengthOfChecked()"/>
+                <label for="podcasts">Podcasts</label>
               </div>
             </div>
-            <div class="details"></div>
+            <div class="profiles">
+              <div class="accounts">
+                <div id="profile_pic_clone_page1" class="profile_pic_clone_page"></div>
+                <div id="user1Details" class="user1Details">
+                  <h2 id="profile_name1" class="profile_name"></h1>
+                    <p id="user_email1" class="user_email"></p>
+                </div>
+              </div>
+              <ion-icon id="cloneAccount" name="swap-horizontal-outline"></ion-icon>
+              <div class="accounts">
+                <button id="login2Button" class="main__button"><a id="projects_button">Login</a></button>
+                <div id="profile_pic_clone_page2" class="profile_pic_clone_page"></div>
+                <div id="user2Details" class="user1Details">
+                  <h2 id="profile_name2" class="profile_name"></h1>
+                    <p id="user_email2" class="user_email"></p>
+                </div>
+              </div>
+            </div>
+            <div class="details">
+              <div class="account">
+                <div class="account_details">
+                  <div class="card1">
+                    <img src="/assests/Liked Songs.png" id="songs_img"alt="" class="card_images">
+                  </div>
+                  <div class="card1">
+                    <img src="" id="album_img"alt="" class="card_images">
+                  </div>
+                  <div class="card1" class="card_images">
+                  </div>
+                  <div class="card1" class="card_images">
+                  </div>
+                  <div class="card1" class="card_images">
+                  </div>
+                </div>
+                <div class="account_details">
+                  <div class="card2">
+                    <img src="/assests/Liked Songs.png" id="songs_img" alt="" class="card_images">
+                  </div>
+                  <div class="card2" class="card_images">
+                  </div>
+                  <div class="card2" class="card_images">
+                  </div>
+                  <div class="card2" class="card_images">
+                  </div>
+                  <div class="card2" class="card_images">
+                  </div>
+                </div>
+              </div>
+            </div>
             <button id="clone" class="clone__button"><a id="clone_button">Clone</a></button>
           </div>
       <div>

@@ -224,7 +224,18 @@ function login2(){
             }) //catches any errors in the request process (invalid code, etc) and logs
     }
 };
-
+function getFirstAlbumCover(){
+    access_token2 = localStorage.getItem('access_token2');
+    fetch('https://api.spotify.com/v1/me/albums?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
+                    .then(response => response.json())
+                    .then(data => {
+                        const album_cover = data["items"][0]["album"]["images"][1]["url"];
+                        console.log(album_cover);
+                        const albumImg = document.getElementById("album_img");
+                        albumImg.src = album_cover;
+                    })
+                    .catch(error => { console.log(error) })
+};
 function getTotalData() {
     access_token1 = localStorage.getItem('access_token1');
     const headers = {
@@ -272,8 +283,43 @@ function getTotalData() {
             console.error(error);
         }
     };
+    const getEpisodes = async () => {
+        try {
+            const response = await fetch("https://api.spotify.com/v1/me/episodes?limit=1", {
+                headers: headers
+            });
+            const data = await response.json();
+            totalData.episodes = data.total;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const getPodcasts = async () => {
+        try {
+            const response = await fetch("https://api.spotify.com/v1/me/shows?limit=1", {
+                headers: headers
+            });
+            const data = await response.json();
+            totalData.podcasts = data.total;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    // const getAudiobooks = async () => {
+    //     try {
+    //         const response = await fetch("https://api.spotify.com/v1/me/audiobooks?limit=1", {
+    //             headers: headers
+    //         });
+    //         const data = await response.json();
+    //         totalData.audiobooks = data.total;
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
-    return Promise.all([getSongs(), getAlbums(), getPlaylists()])
+
+
+    return Promise.all([getSongs(), getAlbums(), getPlaylists(),getEpisodes(),getPodcasts()])
         .then(() => {
             console.log(totalData);
             return totalData;
@@ -330,6 +376,7 @@ if (localStorage.getItem('access_token1')) {
 }
 
 if (localStorage.getItem('access_token2')) {
+    getFirstAlbumCover()
     checkAndRefreshToken2();
     getTotalData();
     document.getElementById("login2Button").style = "display: none;";

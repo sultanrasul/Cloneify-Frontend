@@ -26,7 +26,8 @@
 }
 
 .page h1 {
-  padding: 2% 2% 2% 2%;
+  /* padding: 2% 2% 2% 2%; */
+  padding-top: 2%;
   text-align: center;
   font-size: 40px;
   font-family: Arial, Helvetica, sans-serif;
@@ -142,14 +143,14 @@ margin: auto; */
   height: 10vh;
   overflow: hidden;
   padding: 0 10%;
-  margin: 0;
   list-style-type: none;
-  background-color: rgba(250, 11, 11, 0);
+  /* background-color: rgba(0, 0, 0, 0.199);  */
+  border-radius: 10px;
+  border-radius: 10px;
   margin: auto;
 }
 
-.flex-child {
-  border-radius: 10px;
+.accounts {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   width: 30%;
@@ -247,7 +248,7 @@ margin: auto; */
   position: absolute;
   bottom: 0;
   right: 0;
-  transform: translateY(-30px) translateX(-50px);
+  /* transform: translateY(-30px) translateX(-50px); */
 
 }
 
@@ -270,21 +271,31 @@ margin: auto; */
 }
 
 .clone {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   text-align: center;
-  margin: 2%;
-  height: 50vh;
-  border-radius: 10px;
+  margin-top: 0.7%;
+  margin-left: 2%;
+  margin-right: 2%;
+  height: 70vh;
+  /* border-radius: 10px; */
   position: relative;
 }
 
 .selection{
   padding-top: 5px;
-  padding-bottom: 20px;
+  padding-bottom: 8px;
   display: flex;
   margin: auto;
   text-align: center;
   justify-content: center;
+  background-color: rgb(131, 120, 120);
+  margin: auto;
+  transition: all 0.7s;  
+  border-radius: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .selection .group {
@@ -298,13 +309,17 @@ input[type="checkbox"] {
 
 label {
   position: relative;
+  font-weight:600 ;
+  color: white;
 }
 
 label:hover{
   cursor: pointer;
+  color: white;
 }
 
 label::before {
+  color: white;
   content: "";
   background: url("/assests/check-circle.svg");
   background-position: center;
@@ -320,6 +335,7 @@ label::before {
 }
 
 input[type="checkbox"]:checked + label::before {
+  color: white;
   transform: scale(1) rotateZ(0deg);
 }
 
@@ -335,14 +351,83 @@ label::after {
 }
 
 .details {
+  padding-top: 1.33%;
   margin: auto;
   height: 70%;
   transition: all 0.7s;
-  background-color: rgba(0, 0, 0, 0.199);   
+  background-color: rgba(0, 0, 0, 0);   
+  border-radius: 10px;
   border-radius: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
   margin-left: auto;
   margin-right: 0;
 
+}
+
+.account {
+  grid-gap: 12%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 45vh;
+  overflow: hidden;
+  padding: 0 5%;
+  margin: 0;
+  list-style-type: none;
+  margin: auto;
+}
+
+.account_details {
+  background-color: rgba(146, 146, 146, 0);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  width: 50%;
+  height: 45vh;
+
+  /* background: linear-gradient(135deg, rgba(76, 109, 106, 0), rgb(63, 62, 62)); */
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+.account::before {
+  content: "";
+  width: 4px;
+  height: 65%;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  /* left: 50%;
+  top: 20%; */
+}
+.card1 {
+  float: right;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  width: 60%;
+  height: 7.7vh;
+  margin-top: 2%;
+  background: linear-gradient(135deg, rgb(134, 134, 134), rgb(63, 62, 62));
+}
+.card2 {
+  float: left;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  width: 60%;
+  height: 7.7vh;
+  margin-top: 2%;
+  background: linear-gradient(135deg, rgb(134, 134, 134), rgb(63, 62, 62));
+}
+
+.card_images {
+  width:  3.5; /* set the width of the image as 10% of the parent container */
+  height: 100%; /* set the height of the image to automatically adjust based on the width */
+  float: left;
+  margin-right: 10px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 5px;
+  border-right: #f01414;
 }
