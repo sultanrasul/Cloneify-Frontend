@@ -2,6 +2,7 @@ let access_token1;
 let refresh_token1;
 let access_token2;
 let refresh_token2;
+let profile_id;
 // var url = "http://localhost:8888"
 var url = "https://cloneify-backend.onrender.com"
 
@@ -178,6 +179,7 @@ function login1(){
                     .then(data => {
                         const display_name = data.display_name;
                         const profile_pic = data.images[0].url;
+                        profile_id = data.id;
                         document.getElementById('signin_img').innerHTML = `<  img id="profile_pic" src=${profile_pic} alt="">`;
                         document.getElementById("signin_text").textContent = display_name;
                         document.getElementById('imagesign').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
@@ -224,18 +226,39 @@ function login2(){
             }) //catches any errors in the request process (invalid code, etc) and logs
     }
 };
-function getFirstAlbumCover(){
-    access_token2 = localStorage.getItem('access_token2');
-    fetch('https://api.spotify.com/v1/me/albums?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
+function getImageCovers(){
+    access_token1 = localStorage.getItem('access_token1');
+    fetch('https://api.spotify.com/v1/me/albums?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
-                        const album_cover = data["items"][0]["album"]["images"][1]["url"];
-                        console.log(album_cover);
-                        const albumImg = document.getElementById("album_img");
-                        albumImg.src = album_cover;
+                        document.getElementById("album_img1").src = data["items"][0]["album"]["images"][1]["url"];
+                        document.getElementById("album_img2").src = data["items"][0]["album"]["images"][1]["url"];
                     })
                     .catch(error => { console.log(error) })
+    fetch('https://api.spotify.com/v1/me/playlists?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("playlist_img1").src = data["items"][0]["images"][1]["url"];;
+                        document.getElementById("playlist_img2").src = data["items"][0]["images"][1]["url"];;
+                    })
+                    .catch(error => { console.log(error) })
+    fetch('https://api.spotify.com/v1/me/shows?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("podcast_img1").src = data["items"][0]["show"]["images"][1]["url"];
+                        document.getElementById("podcast_img2").src = data["items"][0]["show"]["images"][1]["url"];
+                    })
+                    .catch(error => { console.log(error) })
+    fetch('https://api.spotify.com/v1/me/episodes?offset=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("episode_img1").src = data["items"][0]["episode"]["images"][1]["url"];
+                        document.getElementById("episode_img2").src = data["items"][0]["episode"]["images"][1]["url"];
+                    })
+                    .catch(error => { console.log(error) })
+    
 };
+
 function getTotalData() {
     access_token1 = localStorage.getItem('access_token1');
     const headers = {
@@ -336,7 +359,7 @@ function getTotalData() {
 if (localStorage.getItem('access_token1')) {
     checkAndRefreshToken1();
     getTopTracks();
-    getTopArtists()
+    getTopArtists();
 
     access_token1 = localStorage.getItem('access_token1');
     // Use access token to authenticate requests to protected resources
@@ -346,17 +369,19 @@ if (localStorage.getItem('access_token1')) {
             const display_name = data.display_name;
             const profile_pic = data.images[0].url;
             const user_email = data.email;
+            profile_id = data.id;
             document.getElementById('signin_img').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
             document.getElementById('profile_pic_clone_page1').innerHTML = `<img src=${profile_pic} alt="">`;
             document.getElementById("signin_text").textContent = display_name;
             document.getElementById("profile_name1").innerHTML = display_name;
             document.getElementById("user_email1").innerHTML = user_email;
-
-
         })
         .catch(error => {
             console.log(error)
         })
+
+
+
     const signin = document.getElementById("signin");
     signin.addEventListener("click", function () {
         setTimeout(() => {
@@ -376,7 +401,6 @@ if (localStorage.getItem('access_token1')) {
 }
 
 if (localStorage.getItem('access_token2')) {
-    getFirstAlbumCover()
     checkAndRefreshToken2();
     getTotalData();
     document.getElementById("login2Button").style = "display: none;";
@@ -402,6 +426,7 @@ if (localStorage.getItem('access_token2')) {
         .catch(error => {
             console.log(error)
         })
+    getImageCovers();
 
 } else {
     const signin1 = document.getElementById("projects_button");
