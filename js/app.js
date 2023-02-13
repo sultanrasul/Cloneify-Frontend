@@ -260,7 +260,7 @@ function getImageCovers(){
 };
 
 function getTotalData(access_token) {
-    console.log(access_token);
+    // console.log(access_token);
     const headers = {
         "Authorization": `Bearer ${access_token}`,
         "Content-Type": "application/json"
