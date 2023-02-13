@@ -259,10 +259,10 @@ function getImageCovers(){
     
 };
 
-function getTotalData() {
-    access_token1 = localStorage.getItem('access_token1');
+function getTotalData(access_token) {
+    console.log(access_token);
     const headers = {
-        "Authorization": `Bearer ${access_token1}`,
+        "Authorization": `Bearer ${access_token}`,
         "Content-Type": "application/json"
     };
 
@@ -344,7 +344,7 @@ function getTotalData() {
 
     return Promise.all([getSongs(), getAlbums(), getPlaylists(),getEpisodes(),getPodcasts()])
         .then(() => {
-            console.log(totalData);
+            // console.log(totalData);
             return totalData;
         })
         .catch((error) => {
@@ -361,7 +361,20 @@ if (localStorage.getItem('access_token1')) {
     getTopTracks();
     getTopArtists();
 
-    access_token1 = localStorage.getItem('access_token1');
+    getTotalData(access_token1)
+        .then(totalData => {
+            totalData1 = totalData;
+            console.log(totalData1);
+            document.querySelector("#songs1 p").textContent = `Total Liked Songs: ${totalData1.songs}`;
+            document.querySelector("#albums1 p").textContent = `Total Albums: ${totalData1.albums}`;
+            document.querySelector("#playlists1 p").textContent = `Total Playlists: ${totalData1.playlists}`;
+            document.querySelector("#podcasts1 p").textContent = `Total Podcasts: ${totalData1.podcasts}`;
+            document.querySelector("#episodes1 p").textContent = `Total Episodes: ${totalData1.episodes}`;
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
     // Use access token to authenticate requests to protected resources
     fetch('https://api.spotify.com/v1/me', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
         .then(response => response.json())
@@ -402,9 +415,20 @@ if (localStorage.getItem('access_token1')) {
 
 if (localStorage.getItem('access_token2')) {
     checkAndRefreshToken2();
-    getTotalData();
     document.getElementById("login2Button").style = "display: none;";
     access_token2 = localStorage.getItem('access_token2');
+    getTotalData(access_token2)
+        .then(totalData => {
+            totalData2 = totalData;
+            document.querySelector("#songs2 p").textContent = `Total Liked Songs: ${totalData2.songs}`;
+            document.querySelector("#albums2 p").textContent = `Total Albums: ${totalData2.albums}`;
+            document.querySelector("#playlists2 p").textContent = `Total Playlists: ${totalData2.playlists}`;
+            document.querySelector("#podcasts2 p").textContent = `Total Podcasts: ${totalData2.podcasts}`;
+            document.querySelector("#episodes2 p").textContent = `Total Episodes: ${totalData2.episodes}`;
+        })
+        .catch(error => {
+            console.error(error);
+        });
     // Use access token to authenticate requests to protected resources
     fetch('https://api.spotify.com/v1/me', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
         .then(response => response.json())
