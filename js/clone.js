@@ -49,21 +49,22 @@ async function cloneSongs(access_token) {
     }
     allTracks.reverse();
     for (let i = 0; i < allTracks.length; i++) {
-      const response = await fetch(`https://api.spotify.com/v1/me/tracks?ids=${allTracks[i]}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token2}`,
-        },
-      });
-    
-      if (!response.ok) {
-        console.error(`Failed to add track with id ${allTracks[i]}`);
-      }
-    
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  }
+      setTimeout(() => {
+        fetch(`https://api.spotify.com/v1/me/tracks?ids=${allTracks[i]}`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token2}`,
+          },
+        })
+        .then(response => {
+          if (!response.ok) {
+            console.error(`Failed to add track with id ${allTracks[i]}`);
+          }
+        });
+      }, i * 250);
+    }
 }
 
 function toggle(source) {
