@@ -3,8 +3,8 @@ let refresh_token1;
 let access_token2;
 let refresh_token2;
 let profile_id;
-// var url = "http://localhost:8888"
-var url = "https://cloneify-backend.onrender.com"
+var url = "http://localhost:8888"
+// var url = "https://cloneify-backend.onrender.com"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
