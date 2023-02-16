@@ -2,7 +2,8 @@ let access_token1;
 let refresh_token1;
 let access_token2;
 let refresh_token2;
-let profile_id;
+let profile_id1;
+let profile_id2;
 // var url = "http://localhost:8888"
 var url = "https://cloneify-backend.onrender.com"
 
@@ -179,7 +180,7 @@ function login1(){
                     .then(data => {
                         const display_name = data.display_name;
                         const profile_pic = data.images[0].url;
-                        profile_id = data.id;
+                        profile_id1 = data.id;
                         document.getElementById('signin_img').innerHTML = `<  img id="profile_pic" src=${profile_pic} alt="">`;
                         document.getElementById("signin_text").textContent = display_name;
                         document.getElementById('imagesign').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
@@ -214,6 +215,7 @@ function login2(){
                     .then(data => {
                         const display_name = data.display_name;
                         const profile_pic = data.images[0].url;
+                        profile_id2 = data.id;
                         document.getElementById('signin_img').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
                         document.getElementById("signin_text").textContent = display_name;
                         document.getElementById('imagesign').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
@@ -382,7 +384,7 @@ if (localStorage.getItem('access_token1')) {
             const display_name = data.display_name;
             const profile_pic = data.images[0].url;
             const user_email = data.email;
-            profile_id = data.id;
+            profile_id1 = data.id;
             document.getElementById('signin_img').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
             document.getElementById('profile_pic_clone_page1').innerHTML = `<img src=${profile_pic} alt="">`;
             document.getElementById("signin_text").textContent = display_name;
@@ -436,6 +438,7 @@ if (localStorage.getItem('access_token2')) {
             const display_name = data.display_name;
             const profile_pic = data.images[0].url;
             const user_email = data.email;
+            profile_id2 = data.id;
             document.getElementById('profile_pic_clone_page2').innerHTML = `<img src=${profile_pic} alt="">`;
             document.getElementById("profile_name2").innerHTML = display_name;
             document.getElementById("user_email2").innerHTML = user_email;
