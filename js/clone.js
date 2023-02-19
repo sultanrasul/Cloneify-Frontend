@@ -357,9 +357,8 @@ async function clonePlaylists() {
     // Get the playlist image
     const imageResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}/images`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
     const imageData = await imageResponse.json();
-    const imageUrl = imageData[0]["url"];
-    let base64Img;
-
+    const imageUrl = imageData.length > 0 ? imageData[0]["url"] : null;
+    
     // Get the playlist name and description
     const playlistResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
     const playlistData = await playlistResponse.json();
@@ -404,6 +403,7 @@ async function clonePlaylists() {
         break;
     }
 }
+
 console.log(`Processing playlist "${playlistName}"`);
 if (imageUrl) {
   const toDataURL = url => fetch(url)
@@ -439,23 +439,8 @@ if (imageUrl) {
     });
 } else {
   console.log(`No image found for playlist "${playlistName}"`);
-  const createResponse = await fetch(`https://api.spotify.com/v1/users/${profile_id2}/playlists`, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token2}`
-      },
-      body: JSON.stringify({
-          'name': playlistName,
-          'description': playlistDescription,
-          'public': false
-    })
-});
-
-  // Wait for the response to finish
-  await createResponse;
-}
+    await createResponse;
+    }
   }
 }
 

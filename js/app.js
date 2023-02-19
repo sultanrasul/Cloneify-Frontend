@@ -398,7 +398,7 @@ if (localStorage.getItem('access_token1')) {
         .catch(error => {
             console.log(error)
         })
-
+        getImageCovers();
 
 
     const signin = document.getElementById("signin");
