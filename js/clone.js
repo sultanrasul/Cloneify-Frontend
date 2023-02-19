@@ -425,12 +425,12 @@ if (imageUrl) {
     })
     .then(() => {
       console.log(playlist_id_new);
-      if (base64Img) {
+      if (imageUrl) {
         return fetch(`https://api.spotify.com/v1/playlists/${playlist_id_new}/images`, { 
           body: base64Img,
           method: 'PUT', 
           headers: { 
-            'Content-Type': 'image/jpeg', 
+            'Content-Type': 'image/jpeg',   
             'Authorization': `Bearer ${access_token2}` 
           }, 
         })
