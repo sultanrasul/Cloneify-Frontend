@@ -1,35 +1,36 @@
-document.getElementById("clone").addEventListener("click", function () {
-        access_token1 = localStorage.getItem('access_token1');
-        access_token2 = localStorage.getItem('access_token2');
-        const all = document.getElementById("all");  
-        const songs = document.getElementById("songs"); 
-        const playlist = document.getElementById("playlist"); 
-        const albums = document.getElementById("albums"); 
-        const books = document.getElementById("books"); 
-        const episodes = document.getElementById("episodes"); 
-        const shows = document.getElementById("shows"); 
-        if (songs.checked == true ){  
-            cloneSongs();
-          } 
-        if (albums.checked == true ){  
-            cloneAlbums();
-          } 
-        if (podcasts.checked == true ){  
-            clonePodcasts();
-          } 
-        if (episodes.checked == true ){  
-            cloneEpisodes();
-          } 
-        if (playlist.checked == true ){  
-            clonePlaylists();
-          } 
+document.getElementById("clone").addEventListener("click", async function () {
+  access_token1 = localStorage.getItem('access_token1');
+  access_token2 = localStorage.getItem('access_token2');
+  const all = document.getElementById("all");  
+  const songs = document.getElementById("songs"); 
+  const playlist = document.getElementById("playlist"); 
+  const albums = document.getElementById("albums"); 
+  const books = document.getElementById("books"); 
+  const episodes = document.getElementById("episodes"); 
+  const shows = document.getElementById("shows"); 
+
+  if (songs && songs.checked) {  
+    await cloneSongs();
+  } 
+  if (albums && albums.checked) {  
+    await cloneAlbums();
+  } 
+  if (podcasts && podcasts.checked) {  
+    await clonePodcasts();
+  } 
+  if (episodes && episodes.checked) {  
+    await cloneEpisodes();
+  } 
+  if (playlist && playlist.checked) {  
+    await clonePlaylists();
+  } 
 });
 
 async function cloneSongs() {
   access_token1 = localStorage.getItem('access_token1');
   access_token2 = localStorage.getItem('access_token2');
   let results;
-  const totalSongs1 = totalData1.songs;
+  const totalSongs1 = totalData1.songs; 
   const allTracks = [];
   let totalRetrieved = 0;
   let songsSent = 0;
@@ -65,7 +66,10 @@ async function cloneSongs() {
   }
 
   allTracks.reverse();
-  for (let i = 0; i < allTracks.length; i++) {
+const promises = [];
+
+for (let i = 0; i < allTracks.length; i++) {
+  const promise = new Promise((resolve) => {
     setTimeout(() => {
       fetch(`https://api.spotify.com/v1/me/tracks?ids=${allTracks[i]}`, {
         method: "PUT",
@@ -91,9 +95,13 @@ async function cloneSongs() {
                         document.querySelector(`#songs2 p`).innerHTML = `Total Liked Songs: ${ActualTotalSongs}`
                     })
                     .catch(error => { console.log(error) })
+        resolve();
       });
     }, i * 250);
+  });
+  promises.push(promise);
   }
+  await Promise.all(promises);
 }
 
 async function clonePodcasts() {
@@ -104,6 +112,7 @@ async function clonePodcasts() {
   const allPodcasts = [];
   let totalRetrieved = 0;
   let podcastsSent = 0;
+  const promises = [];
   
   while (totalRetrieved < totalPodcasts1) {
     const response = await fetch(
@@ -137,34 +146,35 @@ async function clonePodcasts() {
 
   allPodcasts.reverse();
   for (let i = 0; i < allPodcasts.length; i++) {
-    setTimeout(() => {
-      fetch(`https://api.spotify.com/v1/me/shows?ids=${allPodcasts[i]}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token2}`,
-        },
-      })
-      .then(response => {
-        if (!response.ok) {
-          console.error(`Failed to add track with id ${allPodcasts[i]}`);
-        }
+    const promise = fetch(`https://api.spotify.com/v1/me/shows?ids=${allPodcasts[i]}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token2}`,
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error(`Failed to add track with id ${allPodcasts[i]}`);
+      }
 
-        // Update progress bar
-        podcastsSent++;
-        const percentage = `${Math.round(((totalRetrieved+podcastsSent)/(totalPodcasts1*2)) * 100)}%`;
-        updateProgress("podcasts", percentage);
-        fetch('https://api.spotify.com/v1/me/shows?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
+      // Update progress bar
+      podcastsSent++;
+      const percentage = `${Math.round(((totalRetrieved+podcastsSent)/(totalPodcasts1*2)) * 100)}%`;
+      updateProgress("podcasts", percentage);
+      return fetch('https://api.spotify.com/v1/me/shows?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
                     .then(response => response.json())
                     .then(data => {
                         const ActualTotalPodcasts = data.total;
                         document.querySelector(`#podcasts2 p`).innerHTML = `Total Podcasts: ${ActualTotalPodcasts}`
                     })
                     .catch(error => { console.log(error) })
-      });
-    }, i * 250);
+    });
+    promises.push(promise);
   }
+
+  await Promise.all(promises);
 }
 
 async function cloneAlbums() {
@@ -175,6 +185,7 @@ async function cloneAlbums() {
   const allAlbums = [];
   let totalRetrieved = 0;
   let albumsSent = 0;
+  let promises = [];
   
   while (totalRetrieved < totalAlbums1) {
     const response = await fetch(
@@ -208,36 +219,36 @@ async function cloneAlbums() {
 
   allAlbums.reverse();
   for (let i = 0; i < allAlbums.length; i++) {
-    setTimeout(() => {
-      fetch(`https://api.spotify.com/v1/me/albums?ids=${allAlbums[i]}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token2}`,
-        },
-      })
-      .then(response => {
-        if (!response.ok) {
-          console.error(`Failed to add track with id ${allAlbums[i]}`);
-        }
+    const promise = fetch(`https://api.spotify.com/v1/me/albums?ids=${allAlbums[i]}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token2}`,
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error(`Failed to add album with id ${allAlbums[i]}`);
+      }
 
-        // Update progress bar
-        albumsSent++;
-        const percentage = `${Math.round(((totalRetrieved+albumsSent)/(totalAlbums1*2)) * 100)}%`;
-        updateProgress("albums", percentage);
-        fetch('https://api.spotify.com/v1/me/albums?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
-                    .then(response => response.json())
-                    .then(data => {
-                        const ActualTotalAlbums = data.total;
-                        document.querySelector(`#albums2 p`).innerHTML = `Total Albums: ${ActualTotalAlbums}`
-                    })
-                    .catch(error => { console.log(error) })
-      });
-    }, i * 250);
+      // Update progress bar
+      albumsSent++;
+      const percentage = `${Math.round(((totalRetrieved+albumsSent)/(totalAlbums1*2)) * 100)}%`;
+      updateProgress("albums", percentage);
+      fetch('https://api.spotify.com/v1/me/albums?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
+                  .then(response => response.json())
+                  .then(data => {
+                      const ActualTotalAlbums = data.total;
+                      document.querySelector(`#albums2 p`).innerHTML = `Total Albums: ${ActualTotalAlbums}`
+                  })
+                  .catch(error => { console.log(error) })
+    });
+    promises.push(promise);
   }
-}
 
+  await Promise.all(promises);
+}
 async function cloneEpisodes() {
   access_token1 = localStorage.getItem('access_token1');
   access_token2 = localStorage.getItem('access_token2');
@@ -246,7 +257,8 @@ async function cloneEpisodes() {
   const allEpisodes = [];
   let totalRetrieved = 0;
   let episodesSent = 0;
-  
+  let promises = [];
+
   while (totalRetrieved < totalEpisodes1) {
     const response = await fetch(
       `https://api.spotify.com/v1/me/episodes?limit=50&offset=${totalRetrieved}`,
@@ -279,34 +291,48 @@ async function cloneEpisodes() {
 
   allEpisodes.reverse();
   for (let i = 0; i < allEpisodes.length; i++) {
-    setTimeout(() => {
-      fetch(`https://api.spotify.com/v1/me/episodes?ids=${allEpisodes[i]}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token2}`,
-        },
-      })
-      .then(response => {
-        if (!response.ok) {
-          console.error(`Failed to add track with id ${allEpisodes[i]}`);
-        }
+    const promise = new Promise((resolve) => {
+      setTimeout(() => {
+        fetch(`https://api.spotify.com/v1/me/episodes?ids=${allEpisodes[i]}`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token2}`,
+          },
+        })
+        .then(response => {
+          if (!response.ok) {
+            console.error(`Failed to add episode with id ${allEpisodes[i]}`);
+          }
 
-        // Update progress bar
-        episodesSent++;
-        const percentage = `${Math.round(((totalRetrieved+episodesSent)/(totalEpisodes1*2)) * 100)}%`;
-        updateProgress("episodes", percentage);
-        fetch('https://api.spotify.com/v1/me/episodes?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
+          // Update progress bar
+          episodesSent++;
+          const percentage = `${Math.round(((totalRetrieved+episodesSent)/(totalEpisodes1*2)) * 100)}%`;
+          updateProgress("episodes", percentage);
+          fetch('https://api.spotify.com/v1/me/episodes?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
                     .then(response => response.json())
                     .then(data => {
                         const ActualTotalEpisodes = data.total;
                         document.querySelector(`#episodes2 p`).innerHTML = `Total Episodes: ${ActualTotalEpisodes}`
                     })
                     .catch(error => { console.log(error) })
-      });
-    }, i * 250);
+
+          resolve();
+        })
+        .catch(error => {
+          console.error(`Failed to add episode with id ${allEpisodes[i]}`);
+          resolve();
+        });
+      }, i * 250);
+    });
+
+    promises.push(promise);
   }
+
+  await Promise.all(promises);
+
+  console.log("All requests have been sent.");
 }
 async function clonePlaylists() {
   access_token1 = localStorage.getItem('access_token1');
@@ -315,8 +341,8 @@ async function clonePlaylists() {
   const totalPlaylists1 = totalData1.playlists;
   const allPlaylists = [];
   let totalRetrieved = 0;
-  let episodesSent = 0;
-  
+  let clonedPlaylists = 0; // Counter for cloned playlists
+
   while (totalRetrieved < totalPlaylists1) {
     const response = await fetch(
       `https://api.spotify.com/v1/me/playlists?limit=50&offset=${totalRetrieved}`,
@@ -442,17 +468,21 @@ async function clonePlaylists() {
     await createResponse;
     }
     await addTrackURIsToPlaylist(trackURIs, playlist_id_new, access_token2)
+    clonedPlaylists++
+    const percentage = `${Math.round(50+(clonedPlaylists/(totalPlaylists1*2)) * 100)}%`;
+    console.log(percentage);
+    updateProgress("playlists",percentage)
   }
 }
 
-function toggle(source) {
+async function toggle(source) {
     checkboxes = document.getElementsByName('all');
     for(var i=0, n=checkboxes.length;i<n;i++) {
       checkboxes[i].checked = source.checked;
     }
 }
 
-function checkLengthOfChecked(){
+async function checkLengthOfChecked(){
     const all = document.getElementById("all");  
     const length = document.querySelectorAll('input[type="checkbox"]:checked').length
     if (length == 6){
@@ -461,7 +491,7 @@ function checkLengthOfChecked(){
 }
 
 
-function updateProgress(type,percentage){
+async function updateProgress(type,percentage){
   type = type.toLowerCase();
   const progress = document.getElementById(`width${type}`);
   progress.style.width = percentage;
@@ -471,22 +501,24 @@ function updateProgress(type,percentage){
 
 async function getAllTrackURIs(playlistId, accessToken) {
   const trackURIs = [];
-  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+  let total
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=100`;
   while (url) {
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     });
+    if (!response.ok) {
+      console.error(`Failed to fetch playlist tracks: ${response.status} ${response.statusText}`);
+      break;
+    }
     const data = await response.json();
     trackURIs.push(...data.items.map(item => item.track.uri));
     url = data.next;
-    if (url) {
-      const params = new URLSearchParams(new URL(url).search);
-      const offset = params.get('offset');
-      url = url.replace(`offset=${offset}`, `offset=${parseInt(offset) + 100}`);
-    }
+    total = data.total
   }
+  console.log(`Fetched ${trackURIs.length} tracks out of ${total} in the playlist`);
   return trackURIs;
 }
 
