@@ -350,10 +350,62 @@ async function clonePlaylists() {
   allPlaylists.reverse();
   console.log(allPlaylists);
 
-  // for (let i = 0; i < 0; i++) {
     for (let i = 0; i < allPlaylists.length; i++) {
-    const tracksInPlaylist = []
-    
+      const tracksInPlaylist = []
+      
+      const totalData = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}/tracks`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${access_token1}`,
+        },
+      });
+      
+      if (!totalData.ok) {
+        console.log('Fetch failed with status: ' + totalData.status);
+      }
+      const data = await totalData.json();
+      const totalSongs1 = data.total;
+      console.log('Total number of songs:', totalSongs1);
+
+      let result;
+      let totalRetrieved = 0;
+
+      while (totalRetrieved < totalSongs1) {
+        const response = await fetch(
+          // `https://api.spotify.com/v1/me/tracks?limit=50&offset=${totalRetrieved}`,
+          `https://api.spotify.com/v1/playlists/${allPlaylists[i]}/tracks?limit=50&offset=${totalRetrieved}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${access_token1}`,
+            },
+          }
+      );
+  
+      if (!response.ok) {
+        console.log("Fetch failed with status: " + response.status);
+        break;
+      }
+  
+      result = await response.json();
+      for (let i = 0; i < result.items.length; i++) {
+        tracksInPlaylist.push(result.items[i]["track"]["id"]);
+        console.log(result.items[i]["track"]["id"])
+      }
+      totalRetrieved += result.items.length;
+      tracksInPlaylist.reverse();
+      console.log(tracksInPlaylist);
+      // Update progress bar
+      const percentage = `${Math.round((totalRetrieved*2/(totalSongs1*4)) * 100)}%`;
+      updateProgress("playlists", percentage);
+  
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  
+
+
     // Get the playlist image
     const imageResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}/images`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
     const imageData = await imageResponse.json();
@@ -378,7 +430,7 @@ async function clonePlaylists() {
           'description': playlistDescription,
           'public': false
     })
-});
+  });
 
   // Wait for the response to finish
   await createResponse;
@@ -404,15 +456,15 @@ async function clonePlaylists() {
     }
 }
 
-console.log(`Processing playlist "${playlistName}"`);
-if (imageUrl) {
-  const toDataURL = url => fetch(url)
-    .then(response => response.blob())
-    .then(blob => new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onloadend = () => resolve(reader.result)
-      reader.onerror = reject
-      reader.readAsDataURL(blob)
+  console.log(`Processing playlist "${playlistName}"`);
+  if (imageUrl) {
+    const toDataURL = url => fetch(url)
+      .then(response => response.blob())
+      .then(blob => new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => resolve(reader.result)
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
     }))
 
   let base64Img;
