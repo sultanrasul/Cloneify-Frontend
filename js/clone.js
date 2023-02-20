@@ -343,7 +343,6 @@ async function clonePlaylists() {
     // Update progress bar
     const percentage = `${Math.round((totalRetrieved/(totalPlaylists1*2)) * 100)}%`;
     updateProgress("playlists", percentage);
-
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
@@ -351,86 +350,35 @@ async function clonePlaylists() {
   console.log(allPlaylists);
 
     for (let i = 0; i < allPlaylists.length; i++) {
-      const tracksInPlaylist = []
+      console.log(`Cloning playlist - ID: ${allPlaylists[i]}`)
+      const trackURIs = await getAllTrackURIs(allPlaylists[i], access_token1);
+      console.log(trackURIs);
+
+      // Get the playlist image
+      const imageResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}/images`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
+      const imageData = await imageResponse.json();
+      const imageUrl = imageData.length > 0 ? imageData[0]["url"] : null;
       
-      const totalData = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}/tracks`, {
+      // Get the playlist name and description
+      const playlistResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
+      const playlistData = await playlistResponse.json();
+      const playlistName = playlistData.name;
+      const playlistDescription = playlistData.description;
+
+      // Create the new playlist
+      const createResponse = await fetch(`https://api.spotify.com/v1/users/${profile_id2}/playlists`, {
+        method: 'POST',
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${access_token1}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token2}`
         },
-      });
-      
-      if (!totalData.ok) {
-        console.log('Fetch failed with status: ' + totalData.status);
-      }
-      const data = await totalData.json();
-      const totalSongs1 = data.total;
-      console.log('Total number of songs:', totalSongs1);
-
-      let result;
-      let totalRetrieved = 0;
-
-      while (totalRetrieved < totalSongs1) {
-        const response = await fetch(
-          // `https://api.spotify.com/v1/me/tracks?limit=50&offset=${totalRetrieved}`,
-          `https://api.spotify.com/v1/playlists/${allPlaylists[i]}/tracks?limit=50&offset=${totalRetrieved}`,
-          {
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${access_token1}`,
-            },
-          }
-      );
-  
-      if (!response.ok) {
-        console.log("Fetch failed with status: " + response.status);
-        break;
-      }
-  
-      result = await response.json();
-      for (let i = 0; i < result.items.length; i++) {
-        tracksInPlaylist.push(result.items[i]["track"]["id"]);
-        console.log(result.items[i]["track"]["id"])
-      }
-      totalRetrieved += result.items.length;
-      tracksInPlaylist.reverse();
-      console.log(tracksInPlaylist);
-      // Update progress bar
-      const percentage = `${Math.round((totalRetrieved*2/(totalSongs1*4)) * 100)}%`;
-      updateProgress("playlists", percentage);
-  
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
-  
-
-
-    // Get the playlist image
-    const imageResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}/images`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
-    const imageData = await imageResponse.json();
-    const imageUrl = imageData.length > 0 ? imageData[0]["url"] : null;
-    
-    // Get the playlist name and description
-    const playlistResponse = await fetch(`https://api.spotify.com/v1/playlists/${allPlaylists[i]}`, { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } });
-    const playlistData = await playlistResponse.json();
-    const playlistName = playlistData.name;
-    const playlistDescription = playlistData.description;
-
-    // Create the new playlist
-    const createResponse = await fetch(`https://api.spotify.com/v1/users/${profile_id2}/playlists`, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token2}`
-      },
-      body: JSON.stringify({
-          'name': playlistName,
-          'description': playlistDescription,
-          'public': false
-    })
-  });
+        body: JSON.stringify({
+            'name': playlistName,
+            'description': playlistDescription,
+            'public': false
+      })
+    });
 
   // Wait for the response to finish
   await createResponse;
@@ -493,6 +441,7 @@ async function clonePlaylists() {
   console.log(`No image found for playlist "${playlistName}"`);
     await createResponse;
     }
+    await addTrackURIsToPlaylist(trackURIs, playlist_id_new, access_token2)
   }
 }
 
@@ -520,3 +469,50 @@ function updateProgress(type,percentage){
   h1Element.textContent = percentage;
 };
 
+async function getAllTrackURIs(playlistId, accessToken) {
+  const trackURIs = [];
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+  while (url) {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    const data = await response.json();
+    trackURIs.push(...data.items.map(item => item.track.uri));
+    url = data.next;
+    if (url) {
+      const params = new URLSearchParams(new URL(url).search);
+      const offset = params.get('offset');
+      url = url.replace(`offset=${offset}`, `offset=${parseInt(offset) + 100}`);
+    }
+  }
+  return trackURIs;
+}
+
+async function addTrackURIsToPlaylist(trackURIs, playlistId, accessToken) {
+  const maxBatchSize = 100;
+  const numBatches = Math.ceil(trackURIs.length / maxBatchSize);
+  for (let i = 0; i < numBatches; i++) {
+    const startIndex = i * maxBatchSize;
+    const endIndex = (i + 1) * maxBatchSize;
+    const batch = trackURIs.slice(startIndex, endIndex);
+    await addBatchOfTracksToPlaylist(batch, playlistId, accessToken);
+  }
+}
+
+async function addBatchOfTracksToPlaylist(trackURIs, playlistId, accessToken) {
+  const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      uris: trackURIs
+    })
+  });
+  if (!response.ok) {
+    console.error(`Failed to add tracks to playlist: ${response.status} ${response.statusText}`);
+  }
+}
