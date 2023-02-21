@@ -492,6 +492,7 @@ async function clonePlaylists() {
         await addTrackURIsToPlaylist(trackURIs, playlist_id_new, access_token2)
         clonedPlaylists++
         const percentage = `${Math.round(50+(clonedPlaylists/(totalPlaylists1*2)) * 100)}%`;
+        document.querySelector(`#playlists2 p`).innerHTML = `Total Playlists: ${clonedPlaylists+totalData2.playlists}`
         console.log(percentage);
         updateProgress("playlists",percentage)
         resolve()
