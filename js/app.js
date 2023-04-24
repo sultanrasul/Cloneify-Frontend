@@ -238,8 +238,8 @@ function getImageCovers(){
     fetch('https://api.spotify.com/v1/me/playlists?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById("playlist_img1").src = data["items"][0]["images"][1]["url"];;
-                        document.getElementById("playlist_img2").src = data["items"][0]["images"][1]["url"];;
+                        document.getElementById("playlist_img1").src = data["items"][0]["images"][0]["url"];;
+                        document.getElementById("playlist_img2").src = data["items"][0]["images"][0]["url"];;
                     })
                     .catch(error => { console.log(error) })
     fetch('https://api.spotify.com/v1/me/shows?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
