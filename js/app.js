@@ -5,7 +5,7 @@ let refresh_token2;
 let profile_id1;
 let profile_id2;
 // var url = "http://localhost:8888"
-var url = "https://cloneify-backend.onrender.com"
+var url = "https://cloneify-backend-wup0.onrender.com"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
