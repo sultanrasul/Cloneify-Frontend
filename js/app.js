@@ -9,6 +9,8 @@ var url = "https://cloneify-backend-wup0.onrender.com"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
+const logout1 = document.getElementById("logout1Button");
+const logout2 = document.getElementById("logout2Button");
 
 function checkAndRefreshToken1() {
     access_token1 = localStorage.getItem('access_token1');
@@ -238,8 +240,9 @@ function getImageCovers(){
     fetch('https://api.spotify.com/v1/me/playlists?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById("playlist_img1").src = data["items"][0]["images"][1]["url"];;
-                        document.getElementById("playlist_img2").src = data["items"][0]["images"][1]["url"];;
+                        console.log(data);
+                        document.getElementById("playlist_img1").src = data["items"][0]["images"][0]["url"];
+                        document.getElementById("playlist_img2").src = data["items"][0]["images"][0]["url"];
                     })
                     .catch(error => { console.log(error) })
     fetch('https://api.spotify.com/v1/me/shows?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
@@ -379,19 +382,24 @@ if (localStorage.getItem('access_token1')) {
     fetch('https://api.spotify.com/v1/me', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             const display_name = data.display_name;
             const user_email = data.email;
             profile_id1 = data.id;
             document.getElementById("signin_text").textContent = display_name;
             document.getElementById("profile_name1").innerHTML = display_name;
+            document.getElementById("account_profile_name1").innerHTML = display_name;
             document.getElementById("user_email1").innerHTML = user_email;
+            document.getElementById("account_user_email1").innerHTML = user_email;
             
             const profile_pic = data.images.length > 0 ? data.images[0].url : null;
             if (profile_pic !== null) {
                 document.getElementById('signin_img').innerHTML = `<img id="profile_pic" src=${profile_pic} alt="">`;
                 document.getElementById('profile_pic_clone_page1').innerHTML = `<img src=${profile_pic} alt="">`;
+                document.getElementById('account_profile_pic_clone_page1').innerHTML = `<img src=${profile_pic} alt="">`;
             } else {
                 document.getElementById('profile_pic_clone_page1').innerHTML = `<svg role="img" height="50" width="50" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M6.233.371a4.388 4.388 0 0 1 5.002 1.052c.421.459.713.992.904 1.554.143.421.263 1.173.22 1.894-.078 1.322-.638 2.408-1.399 3.316l-.127.152a.75.75 0 0 0 .201 1.13l2.209 1.275a4.75 4.75 0 0 1 2.375 4.114V16H.382v-1.143a4.75 4.75 0 0 1 2.375-4.113l2.209-1.275a.75.75 0 0 0 .201-1.13l-.126-.152c-.761-.908-1.322-1.994-1.4-3.316-.043-.721.077-1.473.22-1.894a4.346 4.346 0 0 1 .904-1.554c.411-.448.91-.807 1.468-1.052zM8 1.5a2.888 2.888 0 0 0-2.13.937 2.85 2.85 0 0 0-.588 1.022c-.077.226-.175.783-.143 1.323.054.921.44 1.712 1.051 2.442l.002.001.127.153a2.25 2.25 0 0 1-.603 3.39l-2.209 1.275A3.25 3.25 0 0 0 1.902 14.5h12.196a3.25 3.25 0 0 0-1.605-2.457l-2.209-1.275a2.25 2.25 0 0 1-.603-3.39l.127-.153.002-.001c.612-.73.997-1.52 1.052-2.442.032-.54-.067-1.097-.144-1.323a2.85 2.85 0 0 0-.588-1.022A2.888 2.888 0 0 0 8 1.5z"></path></svg>`;
+                document.getElementById('account_profile_pic_clone_page1').innerHTML = `<svg role="img" height="50" width="50" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M6.233.371a4.388 4.388 0 0 1 5.002 1.052c.421.459.713.992.904 1.554.143.421.263 1.173.22 1.894-.078 1.322-.638 2.408-1.399 3.316l-.127.152a.75.75 0 0 0 .201 1.13l2.209 1.275a4.75 4.75 0 0 1 2.375 4.114V16H.382v-1.143a4.75 4.75 0 0 1 2.375-4.113l2.209-1.275a.75.75 0 0 0 .201-1.13l-.126-.152c-.761-.908-1.322-1.994-1.4-3.316-.043-.721.077-1.473.22-1.894a4.346 4.346 0 0 1 .904-1.554c.411-.448.91-.807 1.468-1.052zM8 1.5a2.888 2.888 0 0 0-2.13.937 2.85 2.85 0 0 0-.588 1.022c-.077.226-.175.783-.143 1.323.054.921.44 1.712 1.051 2.442l.002.001.127.153a2.25 2.25 0 0 1-.603 3.39l-2.209 1.275A3.25 3.25 0 0 0 1.902 14.5h12.196a3.25 3.25 0 0 0-1.605-2.457l-2.209-1.275a2.25 2.25 0 0 1-.603-3.39l.127-.153.002-.001c.612-.73.997-1.52 1.052-2.442.032-.54-.067-1.097-.144-1.323a2.85 2.85 0 0 0-.588-1.022A2.888 2.888 0 0 0 8 1.5z"></path></svg>`;
                 document.getElementById('signin_img').innerHTML = `<svg role="img" height="40" width="40" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M6.233.371a4.388 4.388 0 0 1 5.002 1.052c.421.459.713.992.904 1.554.143.421.263 1.173.22 1.894-.078 1.322-.638 2.408-1.399 3.316l-.127.152a.75.75 0 0 0 .201 1.13l2.209 1.275a4.75 4.75 0 0 1 2.375 4.114V16H.382v-1.143a4.75 4.75 0 0 1 2.375-4.113l2.209-1.275a.75.75 0 0 0 .201-1.13l-.126-.152c-.761-.908-1.322-1.994-1.4-3.316-.043-.721.077-1.473.22-1.894a4.346 4.346 0 0 1 .904-1.554c.411-.448.91-.807 1.468-1.052zM8 1.5a2.888 2.888 0 0 0-2.13.937 2.85 2.85 0 0 0-.588 1.022c-.077.226-.175.783-.143 1.323.054.921.44 1.712 1.051 2.442l.002.001.127.153a2.25 2.25 0 0 1-.603 3.39l-2.209 1.275A3.25 3.25 0 0 0 1.902 14.5h12.196a3.25 3.25 0 0 0-1.605-2.457l-2.209-1.275a2.25 2.25 0 0 1-.603-3.39l.127-.153.002-.001c.612-.73.997-1.52 1.052-2.442.032-.54-.067-1.097-.144-1.323a2.85 2.85 0 0 0-.588-1.022A2.888 2.888 0 0 0 8 1.5z"></path></svg>`;
             }
         })
@@ -399,7 +407,7 @@ if (localStorage.getItem('access_token1')) {
             console.log(error)
         })
         getImageCovers();
-
+        logout1.style = "display: block;"
 
     const signin = document.getElementById("signin");
     signin.addEventListener("click", function () {
@@ -422,6 +430,7 @@ if (localStorage.getItem('access_token1')) {
 if (localStorage.getItem('access_token2')) {
     checkAndRefreshToken2();
     document.getElementById("login2Button").style = "display: none;";
+    document.getElementById("account_login2Button").style = "display: none;";
     access_token2 = localStorage.getItem('access_token2');
     getTotalData(access_token2)
         .then(totalData => {
@@ -439,27 +448,32 @@ if (localStorage.getItem('access_token2')) {
     fetch('https://api.spotify.com/v1/me', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             const display_name = data.display_name;
             const user_email = data.email;
             
             const profile_pic = data.images.length > 0 ? data.images[0].url : null;
             if (profile_pic !== null) {
                 document.getElementById('profile_pic_clone_page2').innerHTML = `<img src=${profile_pic} alt="">`;
+                document.getElementById('account_profile_pic_clone_page2').innerHTML = `<img src=${profile_pic} alt="">`;
             } else {
                 document.getElementById('profile_pic_clone_page2').innerHTML = `<svg role="img" height="50" width="50" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M6.233.371a4.388 4.388 0 0 1 5.002 1.052c.421.459.713.992.904 1.554.143.421.263 1.173.22 1.894-.078 1.322-.638 2.408-1.399 3.316l-.127.152a.75.75 0 0 0 .201 1.13l2.209 1.275a4.75 4.75 0 0 1 2.375 4.114V16H.382v-1.143a4.75 4.75 0 0 1 2.375-4.113l2.209-1.275a.75.75 0 0 0 .201-1.13l-.126-.152c-.761-.908-1.322-1.994-1.4-3.316-.043-.721.077-1.473.22-1.894a4.346 4.346 0 0 1 .904-1.554c.411-.448.91-.807 1.468-1.052zM8 1.5a2.888 2.888 0 0 0-2.13.937 2.85 2.85 0 0 0-.588 1.022c-.077.226-.175.783-.143 1.323.054.921.44 1.712 1.051 2.442l.002.001.127.153a2.25 2.25 0 0 1-.603 3.39l-2.209 1.275A3.25 3.25 0 0 0 1.902 14.5h12.196a3.25 3.25 0 0 0-1.605-2.457l-2.209-1.275a2.25 2.25 0 0 1-.603-3.39l.127-.153.002-.001c.612-.73.997-1.52 1.052-2.442.032-.54-.067-1.097-.144-1.323a2.85 2.85 0 0 0-.588-1.022A2.888 2.888 0 0 0 8 1.5z"></path></svg>`;
+                document.getElementById('account_profile_pic_clone_page2').innerHTML = `<svg role="img" height="50" width="50" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M6.233.371a4.388 4.388 0 0 1 5.002 1.052c.421.459.713.992.904 1.554.143.421.263 1.173.22 1.894-.078 1.322-.638 2.408-1.399 3.316l-.127.152a.75.75 0 0 0 .201 1.13l2.209 1.275a4.75 4.75 0 0 1 2.375 4.114V16H.382v-1.143a4.75 4.75 0 0 1 2.375-4.113l2.209-1.275a.75.75 0 0 0 .201-1.13l-.126-.152c-.761-.908-1.322-1.994-1.4-3.316-.043-.721.077-1.473.22-1.894a4.346 4.346 0 0 1 .904-1.554c.411-.448.91-.807 1.468-1.052zM8 1.5a2.888 2.888 0 0 0-2.13.937 2.85 2.85 0 0 0-.588 1.022c-.077.226-.175.783-.143 1.323.054.921.44 1.712 1.051 2.442l.002.001.127.153a2.25 2.25 0 0 1-.603 3.39l-2.209 1.275A3.25 3.25 0 0 0 1.902 14.5h12.196a3.25 3.25 0 0 0-1.605-2.457l-2.209-1.275a2.25 2.25 0 0 1-.603-3.39l.127-.153.002-.001c.612-.73.997-1.52 1.052-2.442.032-.54-.067-1.097-.144-1.323a2.85 2.85 0 0 0-.588-1.022A2.888 2.888 0 0 0 8 1.5z"></path></svg>`;
             }
           
 
             profile_id2 = data.id;
             document.getElementById("profile_name2").innerHTML = display_name;
+            document.getElementById("account_profile_name2").innerHTML = display_name;
             document.getElementById("user_email2").innerHTML = user_email;
+            document.getElementById("account_user_email2").innerHTML = user_email;
 
         })
         .catch(error => {
             console.log(error)
         })
     getImageCovers();
-
+    logout2.style = "display: block;"
 } else {
     const signin1 = document.getElementById("projects_button");
     signin1.addEventListener("click", function () {

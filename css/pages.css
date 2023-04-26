@@ -180,7 +180,7 @@ margin: auto; */
 
 }
 .main__button {
-    width:145px;
+    width:160px;
     font-size: 1rem;
     background-image: #141414;;
     padding: 14px 32px;
@@ -377,6 +377,7 @@ label::after {
   margin: 0;
   list-style-type: none;
   margin: auto;
+  gap: 10%;
 }
 
 .account_details {
