@@ -486,7 +486,12 @@ if (localStorage.getItem('access_token2')) {
     getImageCovers();
     logout2.style = "display: block;"
 } else {
+
     const signin1 = document.getElementById("projects_button");
+    const signin2 = document.getElementById("account_login2Button");
+    signin2.addEventListener("click", function () {
+        window.location.href = `${url}/login2`;
+    });
     signin1.addEventListener("click", function () {
         window.location.href = `${url}/login2`;
     });
