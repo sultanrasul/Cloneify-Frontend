@@ -12,6 +12,17 @@ const top_artists_title = document.getElementById("top_artists");
 const logout1 = document.getElementById("logout1Button");
 const logout2 = document.getElementById("logout2Button");
 
+logout1.addEventListener('click', function() {
+    localStorage.removeItem('access_token1');
+    localStorage.removeItem('refresh_token1');
+    location.reload();
+});
+logout2.addEventListener('click', function() {
+    localStorage.removeItem('access_token2');
+    localStorage.removeItem('refresh_token2');
+    location.reload();
+});
+
 function checkAndRefreshToken1() {
     access_token1 = localStorage.getItem('access_token1');
     refresh_token1 = localStorage.getItem('refresh_token1');
