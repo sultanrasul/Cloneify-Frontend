@@ -4,8 +4,8 @@ let access_token2;
 let refresh_token2;
 let profile_id1;
 let profile_id2;
-// var url = "http://localhost:8888"
-var url = "https://cloneify-backend-wup0.onrender.com"
+var url = "http://localhost:8888"
+// var url = "https://cloneify-backend-wup0.onrender.com"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
@@ -393,7 +393,19 @@ if (localStorage.getItem('access_token1')) {
     fetch('https://api.spotify.com/v1/me', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data);
+            document.querySelector("#country1 p").textContent = `${data["country"]}`;
+            document.querySelector("#type1 p").textContent = `${data["product"]}`;
+            document.querySelector("#followers1 p").textContent = `${data["followers"]["total"]}`;
+            const openProfile1 = document.getElementById("openProfile1");
+
+            openProfile1.addEventListener('click', function() {
+                window.open(
+                    data["external_urls"]["spotify"],
+                    '_blank' // <- This is what makes it open in a new window.
+                  );
+            });
+
             const display_name = data.display_name;
             const user_email = data.email;
             profile_id1 = data.id;
@@ -459,10 +471,20 @@ if (localStorage.getItem('access_token2')) {
     fetch('https://api.spotify.com/v1/me', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token2}` } })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             const display_name = data.display_name;
             const user_email = data.email;
-            
+        
+            document.querySelector("#country2 p").textContent = `${data["country"]}`;
+            document.querySelector("#type2 p").textContent = `${data["product"]}`;
+            document.querySelector("#followers2 p").textContent = `${data["followers"]["total"]}`;
+            const openProfile2 = document.getElementById("openProfile2");
+
+            openProfile2.addEventListener('click', function() {
+                window.open(
+                    data["external_urls"]["spotify"],
+                    '_blank' // <- This is what makes it open in a new window.
+                  );
+            });
             const profile_pic = data.images.length > 0 ? data.images[0].url : null;
             if (profile_pic !== null) {
                 document.getElementById('profile_pic_clone_page2').innerHTML = `<img src=${profile_pic} alt="">`;
