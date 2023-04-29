@@ -1,23 +1,23 @@
 ul#topTracksList {
-    flex-direction: column; /* change the direction of the list items to be vertical */
+    flex-direction: row; /* change the direction of the list items to be vertical */
     list-style-type: none; /* remove the bullet points */
     display: flex; /* display the list items in a row */
     margin: 0; /* remove the default margin */
     padding: 0; /* remove the default padding */
     width: 100%;
+    order: 1;
+    
 }
 
-/* styles for the list items */
 ul#topTracksList li {
-    width: 300px; /* set the width of the list item */
-    display:block;
-    padding: 10px; /* add some padding around the content */
-    margin-bottom: 10px; /* add some margin to the bottom of the list item */
-    box-sizing:content-box; /* include the padding and border in the total width */
+    width: 300px;
+    display: block;
+    padding: 10px;
+    margin: 0 10px; /* add margin to the sides of each item to prevent them from touching */
+    box-sizing: content-box;
     background: linear-gradient(135deg, rgb(83, 123, 119), rgb(156, 156, 156));
     border-radius: 5px;
-    text-align:center; /*center the text inside the li element*/
-
+    text-align: center;
 }
 
 
@@ -43,26 +43,36 @@ ul#topTracksList li h2 {
     margin-bottom: 0px; /* add some margin to the bottom of the list item */
     box-sizing: border-box; /* include the padding and border in the total width */
 }
-
+/* 
 .list-container {
     text-align: center;
-    height: 500px; /* set a fixed height for the container */
+    height: 500px; /* set a fixed height for the container
     padding: 1.5% 0% 0% 4% ;
     height: 60vh;
     width: 100%;
-    display: flex; /* display the lists in a row */
-    justify-content: space-between; /* distribute the space between the two tags */
-        
-}
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+} */
 
-
-.list-container1 {
-    float: right;
+.list-container {
+    text-align: center;
+    height: 500px;
+    padding: 1.5% 0% 0% 4%;
+    height: 60vh;
+    width: 100%;
+    /* display: flex; */
+    justify-content: space-between;
+    overflow-x: scroll; /* add horizontal scrolling to the container */
+    white-space: nowrap;
 }
 
 #topArtistsList {
-    position: relative; /* sets the position of the #topArtistsList container as relative */
+    position: relative; 
     display: flex;
+    order: 2; 
+    display: flex;
+    /* overflow-x: scroll;  */
 }
 
 h2.title#top_artists {
@@ -73,18 +83,21 @@ h2.title#top_artists {
     z-index: 1; /* sets the z-index of the <h2> element to 1, so it will be displayed above the #topArtistsList container */
 }
 ul#topArtistsList {
-    flex-direction: column;
+    flex-direction: row;
     list-style-type: none;
     display: flex;
     margin: 0;
     padding: 0;
+
+    
 }
 
+
 ul#topArtistsList li {
-    width: 260px;
-    display:block;
+    width: 200px;
+    display: block;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 0 10px; /* add margin to the sides of each item to prevent them from touching */
     box-sizing: border-box;
     background: linear-gradient(135deg, rgba(83, 123, 119, 0), rgb(113, 113, 113));
     border-radius: 5px;
@@ -160,14 +173,8 @@ li {
     list-style-type: none; /* remove the bullet points */
     margin: 0; /* remove the default margin */
     padding: 0; /* remove the default padding */
-}
 
-/* styles for the top artists list */
-#topArtistsList {
-    flex: 1; /* take up 1/2 of the available space */
-    list-style-type: none; /* remove the bullet points */
-    margin: 0; /* remove the default margin */
-    padding: 0; /* remove the default padding */
+    
 }
 
 
@@ -176,6 +183,13 @@ li {
     list-style-type: none; /* remove the bullet points */
     margin: 0; /* remove the default margin */
     padding: 0; /* remove the default padding */
+    height: auto;
+    position: relative;
+    display: flex;
+    overflow-x: scroll; 
+
+    
+    
 }
 
 
@@ -210,17 +224,19 @@ ul#topTracksList li div {
     border-radius: 10px; /* set the border radius of the thumb */
 }
 
-/* Decrease the margin-bottom of topTracksList li*/
-ul#topTracksList li {
-    margin-bottom: 5px;
-}
+
 /* Increase the padding of topArtistsList li */
 ul#topArtistsList li {
     padding: 15px;
 }
 /* Decrease the size of the container div */
+/* styles for the list container */
 .list-container {
-    width: 70%;
+    text-align: center;
+    height: 500px; /* set a fixed height for the container */
+    padding: 1.5% 0% 0% 4% ;
+    height: 60vh;
+    width: 100%;
 }
 
 
