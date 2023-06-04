@@ -4,9 +4,11 @@ ul#topTracksList {
     display: flex; /* display the list items in a row */
     margin: 0; /* remove the default margin */
     padding: 0; /* remove the default padding */
-    width: 100%;
     order: 1;
-    
+    width: fit-content;
+    overflow-x: scroll; /* add horizontal scrolling to the container */
+
+
 }
 
 ul#topTracksList li {
@@ -43,17 +45,6 @@ ul#topTracksList li h2 {
     margin-bottom: 0px; /* add some margin to the bottom of the list item */
     box-sizing: border-box; /* include the padding and border in the total width */
 }
-/* 
-.list-container {
-    text-align: center;
-    height: 500px; /* set a fixed height for the container
-    padding: 1.5% 0% 0% 4% ;
-    height: 60vh;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-} */
 
 .list-container {
     text-align: center;
@@ -63,14 +54,15 @@ ul#topTracksList li h2 {
     width: 100%;
     /* display: flex; */
     justify-content: space-between;
-    overflow-x: scroll; /* add horizontal scrolling to the container */
     white-space: nowrap;
+    overflow-x: scroll; /* add horizontal scrolling to the container */
+
 }
 
 #topArtistsList {
-    position: relative; 
+    position: relative;
     display: flex;
-    order: 2; 
+    order: 2;
     display: flex;
     /* overflow-x: scroll;  */
 }
@@ -83,13 +75,14 @@ h2.title#top_artists {
     z-index: 1; /* sets the z-index of the <h2> element to 1, so it will be displayed above the #topArtistsList container */
 }
 ul#topArtistsList {
+    width: fit-content;
     flex-direction: row;
     list-style-type: none;
     display: flex;
     margin: 0;
     padding: 0;
 
-    
+
 }
 
 
@@ -110,7 +103,7 @@ ul#topArtistsList li {
     display: inline-block; /* make the image an inline-block element */
     margin-right: 10px; /* add some margin to the right of the image */
     border-radius: 5px; /* set the border-radius to a fixed pixel value */
-    
+
 
     border-radius: 100%;
     -webkit-box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
@@ -124,18 +117,19 @@ ul#topArtistsList li {
     display: inline-block;
     scale: 2;
     z-index: -1;
-        
+
 }
 #topArtistsList h4 {
-    /* set the height of the image */
-   float: right; /* align the image to the left */
-   clear: both;
-   position:relative;
-   text-align: center;
+     /* set the height of the image */
+    float: right; /* align the image to the left */
+    clear: both;
+    position:relative;
+    text-align: center;
     position: relative; /* sets the position of the <h4> element as relative*/
     z-index: 1; /* sets the z-index of the <h4> element to 1, so it will be displayed above the pseudo-element */
     text-align: right; /* center aligns the text inside the <h4> element*/
-    width: 60%;
+    width: 100%;
+    margin-top: 20%;
 }
 
 
@@ -174,7 +168,7 @@ li {
     margin: 0; /* remove the default margin */
     padding: 0; /* remove the default padding */
 
-    
+
 }
 
 
@@ -186,23 +180,24 @@ li {
     height: auto;
     position: relative;
     display: flex;
-    overflow-x: scroll; 
+    overflow-x: scroll;
 
-    
-    
+
+
 }
 
 
 h3 {
-    font-size: 18px; /* set the font size for the song title */
+    font-size: 100%; /* set the font size for the song title */
     color: black; /* set the color for the song title */
     margin: 0 0 5px 0; /* add some margin to the bottom of the song title */
+    white-space: break-spaces;  
 }
 
 h4{
     color: black;
     font-size: 15px;
-    
+
 }
 ul#topTracksList li div {
   color: black;
