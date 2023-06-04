@@ -15,11 +15,11 @@
     border-radius: 5px;
     transition: 0.1s;
 }
-  
+
   button:hover{
     transform: scale(1.05);
 } */
-  
+
 .home{
     width: 100%;
 	  overflow: hidden;
@@ -60,7 +60,7 @@ h3 {
 .pages {
     display: flex;
     width: 400%;
-    box-sizing: border-box;	
+    box-sizing: border-box;
     grid-gap: 8.3%;
   }
 
@@ -82,13 +82,13 @@ h3 {
     width: 100%;
     height: 79vh;
     transition: all 0.7s;
-    color: white;   
+    color: white;
     border-radius: 10px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-left: auto;
     margin-right: 0;
- 
+
   }
 
 .page::-webkit-scrollbar {
@@ -105,7 +105,7 @@ h3 {
   background-color: #1DB954; /* set the color of the thumb */
   border-radius: 10px; /* set the border radius of the thumb */
 }
-  
+
 .one{
   background: rgb(255, 68, 0);
   background: linear-gradient(135deg, white, rgb(156, 156, 156));
@@ -125,7 +125,7 @@ h3 {
   background-color: limegreen;
   background: linear-gradient(135deg, white, rgb(156, 156, 156));
 }
-/* 
+/*
 display: flex;
 width: 100%;
 height: 77vh;
@@ -220,7 +220,7 @@ margin: auto; */
   background: #1fa34d;
   transition: all 0.35s;
   border-radius: 4px;
-  
+
 }
 
 .openProfile__button:hover:after {
@@ -263,7 +263,7 @@ margin: auto; */
     background: #1fa34d;
     transition: all 0.35s;
     border-radius: 4px;
-    
+
 }
 
 .main__button:hover {
@@ -288,18 +288,14 @@ margin: auto; */
   width:145px;
   font-size: 1rem;
   background-image: #141414;;
-  padding: 14px ;
+  padding: 14px;
   border: none;
   border-radius: 4px;
-  margin-top: 2rem;
   cursor: pointer;
   transition: all 0.35s;
   outline: none;
   background: #4198a3b2;
-  margin: auto;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  text-align: center;
   /* transform: translateY(-30px) translateX(-50px); */
 
 }
@@ -318,7 +314,7 @@ margin: auto; */
 #cloneAccount{
   scale: 4;
   color: #2b8a4c;
-  background-color: #57565667;  
+  background-color: #57565667;
   border-radius: 20%;
 }
 
@@ -342,7 +338,7 @@ margin: auto; */
   justify-content: center;
   background-color: rgba(131, 120, 120, 0.021);
   margin: auto;
-  transition: all 0.7s;  
+  transition: all 0.7s;
   border-radius: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -407,7 +403,7 @@ label::after {
   margin: auto;
   height: 70%;
   transition: all 0.7s;
-  background-color: rgba(0, 0, 0, 0);   
+  background-color: rgba(0, 0, 0, 0);
   border-radius: 10px;
   border-radius: 10px;
   overflow-y: scroll;
