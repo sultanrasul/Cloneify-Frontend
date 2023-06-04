@@ -14,7 +14,7 @@ ul#topTracksList li {
     display: block;
     padding: 10px;
     margin: 0 10px; /* add margin to the sides of each item to prevent them from touching */
-    box-sizing: content-box;
+    /* box-sizing: content-box; */
     background: linear-gradient(135deg, rgb(83, 123, 119), rgb(156, 156, 156));
     border-radius: 5px;
     text-align: center;
@@ -62,8 +62,8 @@ ul#topTracksList li h2 {
     height: 60vh;
     width: 100%;
     /* display: flex; */
-    justify-content: space-between;
-    overflow-x: scroll; /* add horizontal scrolling to the container */
+    /* justify-content: space-between; */
+    /* overflow-x: scroll;  */
     white-space: nowrap;
 }
 
