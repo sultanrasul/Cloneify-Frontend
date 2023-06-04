@@ -4,8 +4,8 @@ let access_token2;
 let refresh_token2;
 let profile_id1;
 let profile_id2;
-var url = "http://localhost:8888"
-// var url = "https://cloneify-backend-wup0.onrender.com"
+// var url = "http://localhost:8888"
+var url = "https://cloneify.funkypanda.me/backend"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");

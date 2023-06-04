@@ -47,15 +47,9 @@ ul#topTracksList li h2 {
 }
 
 .list-container {
-    text-align: center;
-    height: 500px;
-    padding: 1.5% 0% 0% 4%;
-    height: 60vh;
-    width: 100%;
-    /* display: flex; */
     justify-content: space-between;
-    white-space: nowrap;
-    overflow-x: scroll; /* add horizontal scrolling to the container */
+    /* white-space: nowrap; */
+    overflow-x: scroll;
 
 }
 
@@ -205,7 +199,6 @@ ul#topTracksList li div {
   font-weight: bold;
 }
 ::-webkit-scrollbar {
-    width: 12px; /* set the width of the scrollbar */
     background-color: rgba(0, 0, 0, 0); /* set the background color of the scrollbar */
     /* Add the following to position the scrollbar on the right side of the page */
     position: fixed; /* position the scrollbar as fixed */
@@ -228,9 +221,7 @@ ul#topArtistsList li {
 /* styles for the list container */
 .list-container {
     text-align: center;
-    height: 500px; /* set a fixed height for the container */
     padding: 1.5% 0% 0% 4% ;
-    height: 60vh;
     width: 100%;
 }
 
@@ -259,3 +250,43 @@ ul#topArtistsList li {
         text-align:center; /* center align the text inside the title*/
     }
 }
+
+
+
+
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 200px; /* Adjust the height as needed */
+  }
+  
+  .top-half, .bottom-half {
+    flex: 1;
+  }
+  
+  .top-half {
+    /* background-color: #f1f1f1; */
+  }
+  
+  .bottom-half {
+    display: table-row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .svg-container {
+    display: flex;
+    text-align: center;
+  }
+  
+  .svg-item {
+    flex: 1;
+    /* display: flex; */
+  }
+  
+  .svg-wrapper {
+    /* max-width: 1%;  */
+    /* height: auto; */
+  }
