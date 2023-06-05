@@ -50,7 +50,7 @@ ul#topTracksList li h2 {
     justify-content: space-between;
     /* white-space: nowrap; */
     overflow-x: scroll;
-
+    animation: fade-in 1s ease-in-out forwards;
 }
 
 #topArtistsList {
@@ -287,6 +287,19 @@ ul#topArtistsList li {
   }
   
   .svg-wrapper {
+    animation: fade-in 1s ease-in-out forwards;
+
     /* max-width: 1%;  */
     /* height: auto; */
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(20px);
+    }
   }
