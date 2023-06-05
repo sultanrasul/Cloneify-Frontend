@@ -4,13 +4,14 @@ let access_token2;
 let refresh_token2;
 let profile_id1;
 let profile_id2;
-// var url = "http://localhost:8888"
-var url = "https://cloneify.funkypanda.me/backend"
+var url = "http://localhost:8888"
+// var url = "https://cloneify.funkypanda.me/backend"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
 const logout1 = document.getElementById("logout1Button");
 const logout2 = document.getElementById("logout2Button");
+const svgContainer = document.querySelector('.svg-container');
 
 logout1.addEventListener('click', function() {
     localStorage.removeItem('access_token1');
@@ -372,6 +373,10 @@ function getTotalData(access_token) {
 // Check if access token is stored in session storage
 if (localStorage.getItem('access_token1')) {
     checkAndRefreshToken1();
+
+    document.querySelector('.welcome').style = "display: none;";
+
+
     getTopTracks();
     getTopArtists();
 
@@ -441,7 +446,15 @@ if (localStorage.getItem('access_token1')) {
     });
 
 } else {
+
+    const signin1 = document.getElementById("account_login1Button");
+    signin1.addEventListener("click", function () {
+        window.location.href = `${url}/login1`;
+    });
+
     const signin = document.getElementById("signin");
+    hideSVGPhotos();
+    
     signin.addEventListener("click", function () {
         setTimeout(() => {
             window.location.href = `${url}/login1`;
@@ -518,4 +531,12 @@ if (localStorage.getItem('access_token2')) {
         window.location.href = `${url}/login2`;
     });
     login2();
+}
+
+// Hide all the SVG photos
+function hideSVGPhotos() {
+  const svgPhotos = svgContainer.querySelectorAll('img');
+  svgPhotos.forEach(photo => {
+    photo.style.display = 'none';
+  });
 }
