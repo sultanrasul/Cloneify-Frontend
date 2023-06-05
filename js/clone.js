@@ -8,28 +8,39 @@ document.getElementById("clone").addEventListener("click", async function () {
   const books = document.getElementById("books"); 
   const episodes = document.getElementById("episodes"); 
   const podcasts = document.getElementById("podcasts"); 
-  
-  if (songs.checked) {  
-    await cloneSongs();
-    await delay(2000); // wait for 1 second before calling the next function
-  } 
-  if (albums.checked) {  
-    await cloneAlbums();
-    await delay(2000); // wait for 1 second before calling the next function
-  } 
-  if (playlist.checked) {  
-    await delay(4000); // wait for 1 second before calling the next function
-    await clonePlaylists();
-    await delay(2000); // wait for 1 second before calling the next function
-  } 
-  if (podcasts.checked) {  
-    await clonePodcasts();
-    await delay(2000); // wait for 1 second before calling the next function
-  } 
-  if (episodes.checked) {  
-    await cloneEpisodes();
-    await delay(2000); // wait for 1 second before calling the next function
-  } 
+
+
+  const length = document.querySelectorAll('input[type="checkbox"]:checked').length
+  if (length == 0){
+    console.log("None are selected!");
+    notify_error("You have not selected any buttons!");
+  }
+  else if (localStorage.hasOwnProperty('access_token2') == false){
+    notify_error("Please login to your second spotify account!");
+  }
+  else{
+      if (songs.checked) {  
+        await cloneSongs();
+        await delay(2000); // wait for 1 second before calling the next function
+      } 
+      if (albums.checked) {  
+        await cloneAlbums();
+        await delay(2000); // wait for 1 second before calling the next function
+      } 
+      if (playlist.checked) {  
+        await delay(4000); // wait for 1 second before calling the next function
+        await clonePlaylists();
+        await delay(2000); // wait for 1 second before calling the next function
+      } 
+      if (podcasts.checked) {  
+        await clonePodcasts();
+        await delay(2000); // wait for 1 second before calling the next function
+      } 
+      if (episodes.checked) {  
+        await cloneEpisodes();
+        await delay(2000); // wait for 1 second before calling the next function
+      }
+  }
 });
 
 function delay(ms) {
@@ -515,8 +526,8 @@ async function checkLengthOfChecked(){
     const all = document.getElementById("all");  
     const length = document.querySelectorAll('input[type="checkbox"]:checked').length
     if (length == 6){
-        all.checked = true;
-}
+      all.checked = true;
+    }
 }
 
 
@@ -579,21 +590,41 @@ async function addBatchOfTracksToPlaylist(trackURIs, playlistId, accessToken) {
   }
 }
 
+// NOTIFICATIONS
 
+function notify_error(letters) {
+  Toastify({
+    text: letters,
+    duration: 1500,
+    newWindow: false,
+    close: false,
+    gravity: "top", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    className: "Toastify",
+    style: {
+         background: "linear-gradient(to right, #9e3434, #e66431)",
+      // background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+    onClick: function(){} // Callback after click
+  }).showToast();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function notify_success(letters) {
+  // console.log("hello");
+  Toastify({
+    text: letters,
+    duration: 1500,
+    newWindow: false,
+    close: false,
+    gravity: "top", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    stopOnFocus: false, // Prevents dismissing of toast on hover
+    className: "Toastify",
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      //  background: "linear-gradient(to right, #9e3434, #e66431)",
+    },
+    onClick: function(){} // Callback after click
+  }).showToast();
+}

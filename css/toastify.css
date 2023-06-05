@@ -1,0 +1,28 @@
+.Toastify {
+    font-family: 'Roboto', sans-serif;
+    scale: 1.2;
+}
+
+@media screen and (max-width: 1296px) {
+    .Toastify {
+        font-size: large;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .Toastify {
+        font-size: larger;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Toastify {
+        font-size: 24;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .Toastify {
+        font-size: 17px;
+    }
+}
