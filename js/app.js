@@ -5,7 +5,7 @@ let refresh_token2;
 let profile_id1;
 let profile_id2;
 // var url = "http://localhost:8888"
-var url = "https://cloneify.funkypanda.me/backend"
+var url = "https://cloner.funkypanda.me/backend"
 
 const top_tracks_title = document.getElementById("top_tracks");
 const top_artists_title = document.getElementById("top_artists");
@@ -245,30 +245,38 @@ function getImageCovers(){
     fetch('https://api.spotify.com/v1/me/albums?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById("album_img1").src = data["items"][0]["album"]["images"][1]["url"];
-                        document.getElementById("album_img2").src = data["items"][0]["album"]["images"][1]["url"];
+                        // document.getElementById("album_img1").src = data["items"][0]["album"]["images"][1]["url"];
+                        // document.getElementById("album_img2").src = data["items"][0]["album"]["images"][1]["url"];
+                        document.getElementById("album_img1").src = "/assests/covers/album.png"
+                        document.getElementById("album_img2").src = "/assests/covers/album.png";
                     })
                     .catch(error => { console.log(error) })
     fetch('https://api.spotify.com/v1/me/playlists?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        document.getElementById("playlist_img1").src = data["items"][0]["images"][0]["url"];
-                        document.getElementById("playlist_img2").src = data["items"][0]["images"][0]["url"];
+                        document.getElementById("playlist_img1").src = "/assests/covers/playlist.png";
+                        document.getElementById("playlist_img2").src = "/assests/covers/playlist.png";
+                        // document.getElementById("playlist_img1").src = data["items"][0]["images"][0]["url"];
+                        // document.getElementById("playlist_img2").src = data["items"][0]["images"][0]["url"];
                     })
                     .catch(error => { console.log(error) })
     fetch('https://api.spotify.com/v1/me/shows?limit=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById("podcast_img1").src = data["items"][0]["show"]["images"][1]["url"];
-                        document.getElementById("podcast_img2").src = data["items"][0]["show"]["images"][1]["url"];
+                        document.getElementById("podcast_img1").src = "/assests/covers/podcast.png";
+                        document.getElementById("podcast_img2").src = "/assests/covers/podcast.png";
+                        // document.getElementById("podcast_img1").src = data["items"][0]["show"]["images"][1]["url"];
+                        // document.getElementById("podcast_img2").src = data["items"][0]["show"]["images"][1]["url"];
                     })
                     .catch(error => { console.log(error) })
     fetch('https://api.spotify.com/v1/me/episodes?offset=1', { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': `Bearer ${access_token1}` } })
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById("episode_img1").src = data["items"][0]["episode"]["images"][1]["url"];
-                        document.getElementById("episode_img2").src = data["items"][0]["episode"]["images"][1]["url"];
+                        document.getElementById("episode_img1").src = "/assests/covers/episodes.png";
+                        document.getElementById("episode_img2").src = "/assests/covers/episodes.png";
+                        // document.getElementById("episode_img1").src = data["items"][0]["episode"]["images"][1]["url"];
+                        // document.getElementById("episode_img2").src = data["items"][0]["episode"]["images"][1]["url"];
                     })
                     .catch(error => { console.log(error) })
     
@@ -434,7 +442,7 @@ if (localStorage.getItem('access_token1')) {
         .catch(error => {
             console.log(error)
         })
-        getImageCovers();
+        // getImageCovers();
         logout1.style = "display: block;"
 
     const signin = document.getElementById("signin");
@@ -518,7 +526,7 @@ if (localStorage.getItem('access_token2')) {
         .catch(error => {
             console.log(error)
         })
-    getImageCovers();
+    // getImageCovers();
     logout2.style = "display: block;"
 } else {
 
